@@ -1,11 +1,11 @@
 @font-face {
   font-family: TeX;
-  src: url('../public/texgyreadventor-regular.otf');
+  src: url('/texgyreadventor-regular.otf');
 }
 
 @font-face {
   font-family: TeX;
-  src: url('../public/texgyreadventor-bold.otf');
+  src: url('/texgyreadventor-bold.otf');
   font-weight: bold;
 }
 

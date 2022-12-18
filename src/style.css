@@ -1,9 +1,20 @@
+@font-face {
+  font-family: TeX;
+  src: url('../public/texgyreadventor-regular.otf');
+}
+
+@font-face {
+  font-family: TeX;
+  src: url('../public/texgyreadventor-bold.otf');
+  font-weight: bold;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  font-family: Inter, sans-serif;
+  font-family: TeX, sans-serif;
   font-size: 16px;
   line-height: 24px;
   font-weight: 400;

@@ -19,6 +19,8 @@ const preload = join(__dirname, './preload.js')
 // 🚧 Use ['ENV_NAME'] avoid vite:define plugin - Vite@2.x
 const url = process.env['VITE_DEV_SERVER_URL']
 
+process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
+
 function createWindow() {
   win = new BrowserWindow({
     icon: join(process.env.PUBLIC, 'logo.svg'),
@@ -35,6 +37,7 @@ function createWindow() {
   })
 
   win.setMenu(null)
+  win.webContents.openDevTools()
 
   if (app.isPackaged) {
     win.loadFile(join(process.env.DIST, 'index.html'))

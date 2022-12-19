@@ -7,7 +7,7 @@ export const createCards = (genres: any, parent: HTMLElement) => {
         const dummy_1 = document.createElement('div')
         const dummy_2 = document.createElement('div')
         
-        main.className = `border-4 rounded-xl inline-block m-3 overflow-hidden w-[15em] h-[8em] shadow-xl relative cursor-pointer hover:shadow-2xl`
+        main.className = `border-4 rounded-xl inline-block m-3 overflow-hidden w-[15em] h-[8em] shadow-xl relative cursor-pointer hover:shadow-2xl group`
         main.style.borderColor = data['color'];
         main.style.backgroundColor = data['color'];
 
@@ -24,7 +24,7 @@ export const createCards = (genres: any, parent: HTMLElement) => {
         dummy_2.style.backgroundColor = data['color'];
 
         playstop_img.src = "/play.svg"
-        playstop_img.className = "absolute bottom-2 left-2 h-[2.5em]"
+        playstop_img.className = "absolute bottom-2 left-2 h-[2.5em] group-hover:scale-[1.10]"
         
         
         main.appendChild(title);

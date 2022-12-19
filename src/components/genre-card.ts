@@ -12,10 +12,10 @@ export const createCards = (genres: any, parent: HTMLElement) => {
         main.style.backgroundColor = data['color'];
 
         title.innerHTML = title_text;
-        title.className = "font-bold text-white mt-2 ml-2";
+        title.className = "font-bold text-white text-xl mt-2 ml-2";
 
         now_playing.innerHTML = "Playing: John Doe - Relax"
-        now_playing.className = "text-gray-300 ml-2 z-[1000]"
+        now_playing.className = "text-white ml-2 z-[1000]"
 
         dummy_1.className = "brightness-75 absolute w-[15em] h-[8em] rotate-12 top-[100px] left-[150px]"
         dummy_1.style.backgroundColor = data['color'];

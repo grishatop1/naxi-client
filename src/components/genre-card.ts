@@ -7,7 +7,7 @@ export const createCards = (genres: any, parent: HTMLElement) => {
         const dummy_1 = document.createElement('div')
         const dummy_2 = document.createElement('div')
         
-        main.className = `border-4 rounded-xl inline-block m-3 overflow-hidden w-[15em] h-[8em] shadow-xl relative cursor-pointer hover:shadow-2xl group`
+        main.className = `border-4 rounded-xl inline-block m-3 overflow-hidden w-[15em] h-[8em] shadow-xl relative cursor-pointer group`
         main.style.borderColor = data['color'];
         main.style.backgroundColor = data['color'];
 

@@ -12,7 +12,7 @@ export const createCards = (genres: any, parent: HTMLElement) => {
         title.className = "font-bold text-white mt-2 ml-2";
 
         now_playing.innerHTML = "Playing: John Doe - Relax"
-        now_playing.className = "text-gray-300 ml-3"
+        now_playing.className = "text-gray-300 ml-2"
 
         main.appendChild(title);
         main.appendChild(now_playing);

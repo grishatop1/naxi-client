@@ -8,7 +8,7 @@ let createCategorySection = (category: string) => {
     let title = document.createElement('h1')
     let content = document.createElement('div')
     title.innerHTML = category
-    title.className = 'text-4xl m-5'
+    title.className = 'text-4xl m-3'
     element.className = 'm-20'
     element.appendChild(title)
     element.appendChild(content)

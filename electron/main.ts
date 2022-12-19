@@ -28,7 +28,9 @@ function createWindow() {
       contextIsolation: false,
       nodeIntegration: true,
       preload,
-    }
+    },
+    minWidth: 640,
+    minHeight: 420
   })
 
   win.setSize(1000,600)

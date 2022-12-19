@@ -9,8 +9,8 @@ let createCategorySection = (category: string) => {
     let content = document.createElement('div')
     element.className = 'm-20 tablet:m-10 tablet:my-20'
     title.innerHTML = category
-    title.className = 'text-4xl m-3 tablet:m-5 tablet:text-center'
-    content.className = 'flex flex-wrap tablet:justify-center'
+    title.className = 'text-4xl m-3 tablet:m-5 tablet-xl:text-center'
+    content.className = 'flex flex-wrap tablet-xl:justify-center'
     element.appendChild(title)
     element.appendChild(content)
     document.getElementById('content').appendChild(element)

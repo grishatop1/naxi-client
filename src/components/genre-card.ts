@@ -24,7 +24,7 @@ export const createCards = (genres: any, parent: HTMLElement) => {
         dummy_2.style.backgroundColor = data['color'];
 
         playstop_img.src = "/play.svg"
-        playstop_img.className = "absolute bottom-2 left-2 h-[2.5em] group-hover:scale-[1.10]"
+        playstop_img.className = "absolute bottom-2 left-2 h-[2.5em] group-hover:scale-[1.10] transition-all"
         
         
         main.appendChild(title);

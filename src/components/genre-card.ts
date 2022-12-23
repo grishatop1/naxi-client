@@ -1,4 +1,5 @@
-export const createCards = (genres: any, parent: HTMLElement) => {
+export const createCards = (genres: any, parent: HTMLElement): Array<HTMLElement> => {
+    const cards = [];
     for (let [title_text, data] of Object.entries(genres)) {
         const main = document.createElement('div')
         const title = document.createElement('p')
@@ -35,7 +36,9 @@ export const createCards = (genres: any, parent: HTMLElement) => {
         
 
         parent.appendChild(main);
+        cards.push([main, data]);
     }
+    return cards;
 }
 
 // icons source https://www.svgrepo.com/collection/music-control-panel/

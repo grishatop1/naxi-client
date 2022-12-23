@@ -3,6 +3,10 @@ import { createCards } from "./components/genre-card";
 var path = require('path');
 var json_data = require(path.resolve('src/data/stations.json'))
 
+
+
+  
+
 let createCategorySection = (category: string) => {
     let element = document.createElement('section')
     let title = document.createElement('h1')
@@ -18,10 +22,25 @@ let createCategorySection = (category: string) => {
 }
 
 let parseData = (json: Object) => {
+    let cards = [];
     for (let [category, genres] of Object.entries(json['Kategorije'])) {
         const category_content = createCategorySection(category);
-        createCards(genres, category_content);
+        cards.push(...createCards(genres, category_content));
     }
+
+    cards.forEach((card) => {
+        card[0].addEventListener('click', () => {
+            var sound = new Howl({
+                html5: true,
+                src: [card[1].url],
+                autoplay: true,
+            });
+            // sound.once('load', () => {
+            //     sound.play();
+            // })
+        })
+    });
 }
+
 
 parseData(json_data);

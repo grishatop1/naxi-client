@@ -69,6 +69,7 @@ let stopAll = () => {
     currentCard.querySelector('img').src = "/play.svg";
     currentCard.classList.remove('pulsing');
     currentURL = null;
+    currentSound.destruct();
     currentSound = null;
     currentCard = null;
 }

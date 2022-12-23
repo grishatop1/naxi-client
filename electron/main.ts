@@ -28,8 +28,12 @@ function createWindow() {
       contextIsolation: false,
       nodeIntegration: true,
       preload,
-    }
+    },
+    minWidth: 640,
+    minHeight: 420
   })
+
+  win.setSize(1000,600)
 
   // Test active push message to Renderer-process.
   win.webContents.on('did-finish-load', () => {

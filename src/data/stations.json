@@ -29,7 +29,7 @@
             },
             "Classic": {
                 "url": "https://naxidigital-classic128ssl.streaming.rs:8032/;stream.nsv",
-                "color": "#dbdb04"
+                "color": "#a8a803"
             },
             "Chillwave": {
                 "url": "https://naxidigital-chillwave128ssl.streaming.rs:8322/;stream.nsv",
@@ -57,7 +57,7 @@
             },
             "Latino": {
                 "url": "https://naxidigital-latino128ssl.streaming.rs:8232/;stream.nsv",
-                "color": "#ffb247"
+                "color": "#cc8e39"
             }
         },
         "Retro": {
@@ -87,7 +87,7 @@
             },
             "Disco": {
                 "url": "https://naxidigital-disco128ssl.streaming.rs:8352/;stream.nsv",
-                "color": "#c0de00"
+                "color": "#94ab00"
             }
         },
         "Dance": {
@@ -116,18 +116,18 @@
                 "color": "#5398f2"
             }
         },
-        "Domace": {
+        "Domaće": {
             "Naxi": {
                 "url": "https://naxi128ssl.streaming.rs:9152/;stream.nsv",
                 "color": "#0098d2"
             },
             "Boem": {
                 "url": "https://naxidigital-boem128ssl.streaming.rs:8162/;stream.nsv",
-                "color": "#fdc918"
+                "color": "#caa013"
             },
-            "Slager": {
+            "Šlager": {
                 "url": "naxidigital-slager128ssl.streaming.rs:8372/;stream.nsv",
-                "color": "#ffb247"
+                "color": "#cc8e39"
             }
         },
         "Ostalo": {

@@ -1,10 +1,15 @@
 import { createCards } from "./components/genre-card";
 
+var soundmanager2 = require("soundmanager2")
+
 var path = require('path');
 var json_data = require(path.resolve('src/data/stations.json'))
 
 
-
+let currentSound: soundmanager.SMSound = null;
+let currentURL: string = null;
+let currentCard: HTMLElement = null;
+let audioLoading: boolean = false;
   
 
 let createCategorySection = (category: string) => {
@@ -30,17 +35,42 @@ let parseData = (json: Object) => {
 
     cards.forEach((card) => {
         card[0].addEventListener('click', () => {
-            var sound = new Howl({
-                html5: true,
-                src: [card[1].url],
-                autoplay: true,
+            if (audioLoading) {
+                return;
+            }
+            if (currentURL === card[1].url) {
+                stopAll();
+                return;
+            }
+            if (currentURL) {
+                stopAll();
+            }
+            card[0].querySelector('img').src = "/loading.svg";
+            audioLoading = true;
+            currentSound = soundManager.createSound({
+                url: card[1].url,
+                autoLoad: true,
+                volume: 50,
+                onload: () => {
+                    currentSound.play();
+                    card[0].querySelector('img').src = "/stop.svg";
+                    card[0].classList.add('pulsing');
+                    currentURL = card[1].url;
+                    currentCard = card[0];
+                    audioLoading = false;
+                }
             });
-            // sound.once('load', () => {
-            //     sound.play();
-            // })
         })
     });
 }
 
+let stopAll = () => {
+    currentSound.stop();
+    currentCard.querySelector('img').src = "/play.svg";
+    currentCard.classList.remove('pulsing');
+    currentURL = null;
+    currentSound = null;
+    currentCard = null;
+}
 
 parseData(json_data);

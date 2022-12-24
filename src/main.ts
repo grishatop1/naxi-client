@@ -1,5 +1,5 @@
 import { createCards } from "./components/genre-card";
-import { respondToVisibility } from "./utils";
+import { respondToVisibility, hexToRgb } from "./utils";
 
 var soundmanager2 = require("soundmanager2")
 soundManager.setup({
@@ -14,7 +14,7 @@ let currentSound: soundmanager.SMSound = null;
 let currentURL: string = null;
 let currentCard: HTMLElement = null;
 let audioLoading: boolean = false;
-  
+
 
 let createCategorySection = (category: string) => {
     let element = document.createElement('section')
@@ -64,7 +64,7 @@ let parseData = (json: Object) => {
                 onload: () => {
                     currentSound.play();
                     card[0].querySelector('img').src = "/stop.svg";
-                    card[0].classList.add('pulsing');
+                    animatePulse(card[0], card[1].color);
                     currentURL = card[1].url;
                     currentCard = card[0];
                     audioLoading = false;
@@ -74,25 +74,46 @@ let parseData = (json: Object) => {
     });
 }
 
+var animationPulsing: Animation = null;
+let animatePulse = (element: HTMLElement, color: string) => {
+    let colorRGB = hexToRgb(color)
+    const keyframes = [
+        { boxShadow: `0 0 0px 0px rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, 0.8)` },
+        { boxShadow: `0 0 0px 10px rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, 0)` },
+        { boxShadow: `0 0 0px 10px rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, 0)` },
+    ];
+
+    const timing = {
+        duration: 1000,
+        iterations: Infinity
+    };
+
+    animationPulsing = element.animate(keyframes, timing);
+}
+
+let stopAnimatePulse = () => {
+    animationPulsing.cancel()
+}
+
 let fetchMetadata = (card: object) => {
     fetch(card[1].metadata)
-            .then((response) => response.json())
-            .then((data) => {
-                const unparsed_html = data['rs']
-                const parsed = new DOMParser().parseFromString(unparsed_html, "text/xml");
-                
-                const artist = parsed.querySelector(".details p span").innerHTML + " ";
-                const song = [].reduce.call(parsed.querySelector(".details p").childNodes, function(a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
-                
-                const result = artist + song
+        .then((response) => response.json())
+        .then((data) => {
+            const unparsed_html = data['rs']
+            const parsed = new DOMParser().parseFromString(unparsed_html, "text/xml");
 
-                if (result.trim() == "") {
-                    card[0].querySelector('.now-playing').innerHTML = "Naxi Radio - " + card[1].title;
-                } else {
-                    card[0].querySelector('.now-playing').innerHTML = artist + song
-                }
-               
-    });
+            const artist = parsed.querySelector(".details p span").innerHTML + " ";
+            const song = [].reduce.call(parsed.querySelector(".details p").childNodes, function (a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
+
+            const result = artist + song
+
+            if (result.trim() == "") {
+                card[0].querySelector('.now-playing').innerHTML = "Naxi Radio - " + card[1].title;
+            } else {
+                card[0].querySelector('.now-playing').innerHTML = artist + song
+            }
+
+        });
 }
 
 let stopAll = () => {
@@ -103,6 +124,7 @@ let stopAll = () => {
     currentSound.destruct();
     currentSound = null;
     currentCard = null;
+    stopAnimatePulse();
 }
 
 parseData(json_data);

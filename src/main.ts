@@ -84,7 +84,14 @@ let fetchMetadata = (card: object) => {
                 const artist = parsed.querySelector(".details p span").innerHTML + " ";
                 const song = [].reduce.call(parsed.querySelector(".details p").childNodes, function(a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
                 
-                card[0].querySelector('.now-playing').innerHTML = artist + song
+                const result = artist + song
+
+                if (result.trim() == "") {
+                    card[0].querySelector('.now-playing').innerHTML = "Naxi Radio - " + card[1].title;
+                } else {
+                    card[0].querySelector('.now-playing').innerHTML = artist + song
+                }
+               
     });
 }
 

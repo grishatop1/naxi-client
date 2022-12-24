@@ -34,7 +34,8 @@ export const createCards = (genres: any, parent: HTMLElement): Array<HTMLElement
         main.appendChild(dummy_2);
         main.appendChild(playstop_img);
         
-
+        
+        data['title'] = title_text;
         parent.appendChild(main);
         cards.push([main, data]);
     }

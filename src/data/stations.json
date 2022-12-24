@@ -3,145 +3,172 @@
         "Mix": {
             "Mix": {
                 "url": "https://naxidigital-mix128ssl.streaming.rs:8222/;stream.nsv",
-                "color": "#de2c2c"
+                "color": "#de2c2c",
+                "metadata": "https://www.naxi.rs/stations/rs-mix.json"
             }
         },
         "Chill": {
             "Cafe": {
                 "url": "https://naxidigital-cafe128ssl.streaming.rs:8022/;stream.nsv",
-                "color": "#f08c13"
+                "color": "#f08c13",
+                "metadata": "https://www.naxi.rs/stations/rs-cafe.json"
             },
             "Evergreen": {
                 "url": "https://naxidigital-evergreen128ssl.streaming.rs:8012/;stream.nsv",
-                "color": "#0a9c00"
+                "color": "#0a9c00",
+                "metadata": "https://www.naxi.rs/stations/rs-evergreen.json"
             },
             "Funk": {
                 "url": "https://naxidigital-funk128ssl.streaming.rs:8362/;stream.nsv",
-                "color": "#9900cc"
+                "color": "#9900cc",
+                "metadata": "https://www.naxi.rs/stations/rs-funk.json"
             },
             "Lounge": {
                 "url": "https://naxidigital-lounge128ssl.streaming.rs:8252/;stream.nsv",
-                "color": "#d96400"
+                "color": "#d96400",
+                "metadata": "https://www.naxi.rs/stations/rs-lounge.json"
             },
             "Jazz": {
                 "url": "https://naxidigital-jazz128ssl.streaming.rs:8172/;stream.nsv",
-                "color": "#996c31"
+                "color": "#996c31",
+                "metadata": "https://www.naxi.rs/stations/rs-jazz.json"
             },
             "Classic": {
                 "url": "https://naxidigital-classic128ssl.streaming.rs:8032/;stream.nsv",
-                "color": "#a8a803"
+                "color": "#a8a803",
+                "metadata": "https://www.naxi.rs/stations/rs-classic.json"
             },
             "Chillwave": {
                 "url": "https://naxidigital-chillwave128ssl.streaming.rs:8322/;stream.nsv",
-                "color": "#d81fde"
+                "color": "#d81fde",
+                "metadata": "https://www.naxi.rs/stations/rs-chillwave.json"
             },
             "Love": {
                 "url": "https://naxidigital-love128ssl.streaming.rs:8102/;stream.nsv",
-                "color": "#f06eaa"
+                "color": "#f06eaa",
+                "metadata": "https://www.naxi.rs/stations/rs-love.json"
             }
         },
         "Rock": {
             "Rock": {
                 "url": "https://naxidigital-rock128ssl.streaming.rs:8182/;stream.nsv",
-                "color": "#555d61"
+                "color": "#555d61",
+                "metadata": "https://www.naxi.rs/stations/rs-rock.json"
             },
             "Blues Rock": {
                 "url": "https://naxidigital-blues128ssl.streaming.rs:8312/;stream.nsv",
-                "color": "#344882"
+                "color": "#344882",
+                "metadata": "https://www.naxi.rs/stations/rs-blues.json"
             }
         },
         "Strane": {
             "Adore": {
                 "url": "https://naxidigital-adore128ssl.streaming.rs:8332/;stream.nsv",
-                "color": "#d10054"
+                "color": "#d10054",
+                "metadata": "https://www.naxi.rs/stations/rs-adore.json"
             },
             "Latino": {
                 "url": "https://naxidigital-latino128ssl.streaming.rs:8232/;stream.nsv",
-                "color": "#cc8e39"
+                "color": "#cc8e39",
+                "metadata": "https://www.naxi.rs/stations/rs-latino.json"
             }
         },
         "Retro": {
             "70e": {
                 "url": "https://naxidigital-70s128ssl.streaming.rs:8382/;stream.nsv",
-                "color": "#d6005d"
+                "color": "#d6005d",
+                "metadata": "https://www.naxi.rs/stations/rs-70e.json"
             },
             "80e": {
                 "url": "https://naxidigital-80s128ssl.streaming.rs:8042/;stream.nsv",
-                "color": "#ed145b"
+                "color": "#ed145b",
+                "metadata": "https://www.naxi.rs/stations/rs-80e.json"
             },
             "90e": {
                 "url": "https://naxidigital-90s128ssl.streaming.rs:8282/;stream.nsv",
-                "color": "#f213d4"
+                "color": "#f213d4",
+                "metadata": "https://www.naxi.rs/stations/rs-90e.json"
             },
             "Millennium": {
                 "url": "https://naxidigital-millennium128ssl.streaming.rs:8342/;stream.nsv",
-                "color": "#b43dbd"
+                "color": "#b43dbd",
+                "metadata": "https://www.naxi.rs/stations/rs-millennium.json"
             },
             "Ex Yu": {
                 "url": "https://naxidigital-exyu128ssl.streaming.rs:8242/;stream.nsv",
-                "color": "#2539f5"
+                "color": "#2539f5",
+                "metadata": "https://www.naxi.rs/stations/rs-exyu.json"
             },
             "Gold": {
                 "url": "https://naxidigital-gold128ssl.streaming.rs:8062/;stream.nsv",
-                "color": "#ea542c"
+                "color": "#ea542c",
+                "metadata": "https://www.naxi.rs/stations/rs-gold.json"
             },
             "Disco": {
                 "url": "https://naxidigital-disco128ssl.streaming.rs:8352/;stream.nsv",
-                "color": "#94ab00"
+                "color": "#94ab00",
+                "metadata": "https://www.naxi.rs/stations/rs-disco.json"
             }
         },
         "Dance": {
             "Dance": {
                 "url": "https://naxidigital-dance128ssl.streaming.rs:8112/;stream.nsv",
-                "color": "#004f92"
+                "color": "#004f92",
+                "metadata": "https://www.naxi.rs/stations/rs-dance.json"
             },
             "Clubbing": {
                 "url": "https://naxidigital-clubbing128ssl.streaming.rs:8092/;stream.nsv",
-                "color": "#00c651"
+                "color": "#00c651",
+                "metadata": "https://www.naxi.rs/stations/rs-clubbing.json"
             },
             "Fresh": {
                 "url": "https://naxidigital-fresh128ssl.streaming.rs:8212/;stream.nsv",
-                "color": "#6edb00"
+                "color": "#6edb00",
+                "metadata": "https://www.naxi.rs/stations/rs-fresh.json"
             },
             "Fitness": {
                 "url": "https://naxidigital-fitness128ssl.streaming.rs:8292/;stream.nsv",
-                "color": "#b8b8b8"
+                "color": "#b8b8b8",
+                "metadata": "https://www.naxi.rs/stations/rs-fitness.json"
             },
             "House": {
                 "url": "https://naxidigital-house128ssl.streaming.rs:8002/;stream.nsv",
-                "color": "#8dc73f"
+                "color": "#8dc73f",
+                "metadata": "https://www.naxi.rs/stations/rs-house.json"
             },
             "R'n'B": {
                 "url": "https://naxidigital-rnb128ssl.streaming.rs:8122/;stream.nsv",
-                "color": "#5398f2"
+                "color": "#5398f2",
+                "metadata": "https://www.naxi.rs/stations/rs-rnb.json"
             }
         },
         "Domaće": {
             "Naxi": {
                 "url": "https://naxi128ssl.streaming.rs:9152/;stream.nsv",
-                "color": "#0098d2"
+                "color": "#0098d2",
+                "metadata": "https://www.naxi.rs/stations/rs-naxi.json"
             },
             "Boem": {
                 "url": "https://naxidigital-boem128ssl.streaming.rs:8162/;stream.nsv",
-                "color": "#caa013"
-            },
-            "Šlager": {
-                "url": "naxidigital-slager128ssl.streaming.rs:8372/;stream.nsv",
-                "color": "#cc8e39"
+                "color": "#caa013",
+                "metadata": "https://www.naxi.rs/stations/rs-boem.json"
             }
         },
         "Ostalo": {
             "Xmas": {
                 "url": "https://naxidigital-xmas128.streaming.rs:8392/;stream.nsv",
-                "color": "#ff3333"
+                "color": "#ff3333",
+                "metadata": "https://www.naxi.rs/stations/rs-xmas.json"
             },
             "Kids": {
                 "url": "https://naxidigital-kids128ssl.streaming.rs:8052/;stream.nsv",
-                "color": "#0cc6f2"
+                "color": "#0cc6f2",
+                "metadata": "https://www.naxi.rs/stations/rs-kids.json"
             },
             "Hype": {
                 "url": "https://naxidigital-hype128ssl.streaming.rs:8272/;stream.nsv",
-                "color": "#5821b8"
+                "color": "#5821b8",
+                "metadata": "https://www.naxi.rs/stations/rs-hype.json"
             }
         }
     }

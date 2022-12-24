@@ -57,7 +57,7 @@ function useLoading() {
   align-items: center;
   justify-content: center;
   background: #282c34;
-  z-index: 9;
+  z-index: 10000;
 }
     `
   const oStyle = document.createElement('style')

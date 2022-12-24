@@ -1,6 +1,10 @@
 import { createCards } from "./components/genre-card";
+import { respondToVisibility } from "./utils";
 
 var soundmanager2 = require("soundmanager2")
+soundManager.setup({
+    debugMode: false
+})
 
 var path = require('path');
 var json_data = require(path.resolve('src/data/stations.json'))
@@ -34,6 +38,12 @@ let parseData = (json: Object) => {
     }
 
     cards.forEach((card) => {
+        respondToVisibility(card[0], () => {
+            fetchMetadata(card);
+            setTimeout(() => {
+                fetchMetadata(card);
+            }, 3000)
+        });
         card[0].addEventListener('click', () => {
             if (audioLoading) {
                 return;
@@ -61,6 +71,20 @@ let parseData = (json: Object) => {
                 }
             });
         })
+    });
+}
+
+let fetchMetadata = (card: object) => {
+    fetch(card[1].metadata)
+            .then((response) => response.json())
+            .then((data) => {
+                const unparsed_html = data['rs']
+                const parsed = new DOMParser().parseFromString(unparsed_html, "text/xml");
+                
+                const artist = parsed.querySelector(".details p span").innerHTML + " ";
+                const song = [].reduce.call(parsed.querySelector(".details p").childNodes, function(a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
+                
+                card[0].querySelector('.now-playing').innerHTML = artist + song
     });
 }
 

@@ -28,6 +28,7 @@ function createWindow() {
       contextIsolation: false,
       nodeIntegration: true,
       preload,
+      webSecurity: false
     },
     minWidth: 640,
     minHeight: 420

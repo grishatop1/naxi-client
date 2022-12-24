@@ -1,5 +1,6 @@
 import { createCards } from "./components/genre-card";
 import { respondToVisibility, hexToRgb } from "./utils";
+import anime from 'animejs/lib/anime.es.js';
 
 var soundmanager2 = require("soundmanager2")
 soundManager.setup({
@@ -50,6 +51,7 @@ let parseData = (json: Object) => {
             }
             if (currentURL === card[1].url) {
                 stopAll();
+                hideInfoPanel();
                 return;
             }
             if (currentURL) {
@@ -63,15 +65,44 @@ let parseData = (json: Object) => {
                 volume: 50,
                 onload: () => {
                     currentSound.play();
-                    card[0].querySelector('img').src = "/stop.svg";
-                    animatePulse(card[0], card[1].color);
+                    
                     currentURL = card[1].url;
                     currentCard = card[0];
                     audioLoading = false;
+
+                    animatePulse(card[0], card[1].color);
+                    showInfoPanel(card[1].title, card[1].color);
+                    card[0].querySelector('img').src = "/stop.svg";
                 }
             });
         })
     });
+}
+
+setInterval(()=> {
+    info_panel.querySelector("#info-now-playing").innerHTML = currentCard.querySelector("#now-playing").innerHTML; 
+}, 5000)
+
+const info_panel = document.querySelector("#info-panel")
+let showInfoPanel = (genre: string, color: string) => {
+    info_panel.querySelector("#info-song-title").innerHTML = genre;
+    info_panel.querySelector("#info-now-playing").innerHTML = currentCard.querySelector("#now-playing").innerHTML;
+    document.getElementById("info-panel-box").style.backgroundColor = color;
+    anime({
+        targets: info_panel,
+        bottom: "0",
+        duration: 300,
+        easing: "easeOutQuart"
+    })
+}
+
+let hideInfoPanel = () => {
+    anime({
+        targets: info_panel,
+        bottom: "-5em",
+        duration: 300,
+        easing: "easeOutQuart"
+    })
 }
 
 var animationPulsing: Animation = null;
@@ -108,9 +139,9 @@ let fetchMetadata = (card: object) => {
             const result = artist + song
 
             if (result.trim() == "") {
-                card[0].querySelector('.now-playing').innerHTML = "Naxi Radio - " + card[1].title;
+                card[0].querySelector('#now-playing').innerHTML = "Naxi Radio - " + card[1].title;
             } else {
-                card[0].querySelector('.now-playing').innerHTML = artist + song
+                card[0].querySelector('#now-playing').innerHTML = result;
             }
 
         });

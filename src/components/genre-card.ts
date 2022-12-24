@@ -17,6 +17,7 @@ export const createCards = (genres: any, parent: HTMLElement): Array<HTMLElement
 
         now_playing.innerHTML = "Loading..."
         now_playing.className = "text-white ml-2 z-[0] now-playing select-none relative whitespace-nowrap"
+        now_playing.id = "now-playing"
 
         dummy_1.className = "brightness-75 absolute w-[15em] h-[8em] rotate-12 top-[100px] left-[150px]"
         dummy_1.style.backgroundColor = data['color'];

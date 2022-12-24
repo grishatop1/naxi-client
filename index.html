@@ -17,9 +17,11 @@
         <div class="naxi-logo text-xl mx-10 whitespace-nowrap">
           Naxi 🎵
         </div>
-        <div id="info-panel-box" class="info-card rounded-xl bg-gray-400 w-[60%] h-[3em] flex items-center justify-between">
-          <span class="text-white text-xl font-bold mx-10 whitespace-nowrap leading-normal" id="info-song-title">Evergreen</span>
-          <span class="text-white mx-10 text-center" id="info-now-playing">Playing: Donny Osmond - Puppy Nesta</span>
+        <div id="info-panel-box" class="relative info-card rounded-xl bg-gray-400 w-[60%] h-[3em] flex items-center justify-between overflow-hidden">
+          <div id="info-dummy" class="brightness-[0.9] w-[300px] h-[100px] absolute left-[-100px] bg-black rotate-[-10deg]">
+          </div>
+          <span class="text-white text-xl font-bold mx-10 whitespace-nowrap leading-normal relative" id="info-song-title">Evergreen</span>
+          <span class="text-white mx-10 text-center relative z-[20] relative" id="info-now-playing">Playing: Donny Osmond - Puppy Nesta</span>
         </div>
         <input type="range" min="-100" max="0" value="0" class="range mx-10"/>
       </div>

@@ -65,7 +65,7 @@ let parseData = (json: Object) => {
                 volume: 50,
                 onload: () => {
                     currentSound.play();
-                    
+
                     currentURL = card[1].url;
                     currentCard = card[0];
                     audioLoading = false;
@@ -79,14 +79,15 @@ let parseData = (json: Object) => {
     });
 }
 
-setInterval(()=> {
-    info_panel.querySelector("#info-now-playing").innerHTML = currentCard.querySelector("#now-playing").innerHTML; 
+setInterval(() => {
+    info_panel.querySelector("#info-now-playing").innerHTML = currentCard.querySelector("#now-playing").innerHTML;
 }, 5000)
 
 const info_panel = document.querySelector("#info-panel")
 let showInfoPanel = (genre: string, color: string) => {
     info_panel.querySelector("#info-song-title").innerHTML = genre;
     info_panel.querySelector("#info-now-playing").innerHTML = currentCard.querySelector("#now-playing").innerHTML;
+    document.getElementById("info-dummy").style.backgroundColor = color;
     document.getElementById("info-panel-box").style.backgroundColor = color;
     anime({
         targets: info_panel,

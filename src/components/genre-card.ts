@@ -13,7 +13,7 @@ export const createCards = (genres: any, parent: HTMLElement): Array<HTMLElement
         main.style.backgroundColor = data['color'];
 
         title.innerHTML = title_text;
-        title.className = "font-bold text-white text-xl mt-2 ml-2";
+        title.className = "font-bold text-white text-xl mt-2 ml-2 select-none";
 
         now_playing.innerHTML = "Loading..."
         now_playing.className = "text-white ml-2 z-[0] now-playing relative whitespace-nowrap"

@@ -153,9 +153,10 @@
                 "color": "#caa013",
                 "metadata": "https://www.naxi.rs/stations/rs-boem.json"
             },
-            "Slager": {
-                "url": "naxidigital-slager128ssl.streaming.rs:8372/;stream.nsv",
-                "color": "#ffb247"
+            "Šlager": {
+                "url": "https://naxidigital-slager128ssl.streaming.rs:8372/;stream.nsv",
+                "color": "#cc8e39",
+                "metadata": "https://www.naxi.rs/stations/rs-slager.json"
             }
         },
         "Ostalo": {

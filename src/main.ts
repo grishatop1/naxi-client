@@ -80,7 +80,9 @@ let parseData = (json: Object) => {
 }
 
 setInterval(() => {
-    info_panel.querySelector("#info-now-playing").innerHTML = currentCard.querySelector("#now-playing").innerHTML;
+    if (currentCard) {
+        info_panel.querySelector("#info-now-playing").innerHTML = currentCard.querySelector("#now-playing").innerHTML;
+    }
 }, 5000)
 
 const info_panel = document.querySelector("#info-panel")
@@ -158,5 +160,11 @@ let stopAll = () => {
     currentCard = null;
     stopAnimatePulse();
 }
+
+const volume_slider = <HTMLInputElement>document.getElementById('volume-slider');
+volume_slider.addEventListener('input', () => {
+    const value = 100 + parseInt(volume_slider.value);
+    currentSound.setVolume(value);
+})
 
 parseData(json_data);

@@ -40,9 +40,9 @@ let parseData = (json: Object) => {
     cards.forEach((card) => {
         respondToVisibility(card[0], () => {
             fetchMetadata(card);
-            setTimeout(() => {
+            setInterval(() => {
                 fetchMetadata(card);
-            }, 3000)
+            }, 10000)
         });
         card[0].addEventListener('click', () => {
             if (audioLoading) {

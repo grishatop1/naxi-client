@@ -14,14 +14,23 @@ class Player {
     sound?: soundmanager.SMSound
     playing_card?: Card
     volume: number
-    volume_slider: HTMLElement
+    volume_slider: HTMLInputElement
     is_playing: boolean
     is_loading: boolean
     constructor(volume: number) {
         this.is_loading = false;
         this.is_playing = false;
-        this.volume_slider = document.getElementById('volume-slider');
+        this.volume_slider = <HTMLInputElement>document.getElementById('volume-slider');
         this.volume = volume;
+
+        this.volume_slider.addEventListener('input', () => {
+            this.change_volume();
+        });
+    }
+    change_volume() {
+        const new_volume = parseInt(this.volume_slider.value);
+        this.sound.setVolume(new_volume);
+        this.volume = new_volume;
     }
     request_play(card: Card) {
         if (this.is_loading) {

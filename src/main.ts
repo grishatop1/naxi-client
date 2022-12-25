@@ -174,9 +174,35 @@ theme_btn.addEventListener('click', () => {
     if (theme === "light") {
         document.documentElement.classList.add("dark")
         theme = "dark";
+        
+        anime({
+            targets: "#moon",
+            translateX: "-3em"
+        })
+        anime({
+            targets: "#sun",
+            translateX: "0em"
+        })
+        anime({
+            targets: "#theme-btn",
+            backgroundColor: "#fff"
+        })
     } else {
         document.documentElement.classList.remove("dark")
         theme = "light";
+
+        anime({
+            targets: "#moon",
+            translateX: "0em"
+        })
+        anime({
+            targets: "#sun",
+            translateX: "3em"
+        })
+        anime({
+            targets: "#theme-btn",
+            backgroundColor: "#000"
+        })
     }
     
 });

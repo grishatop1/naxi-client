@@ -1,4 +1,5 @@
 import path from 'path';
+import anime from 'animejs';
 
 import { enableThemeSwitching } from './components/theme';
 import { createCardElement, Card } from './components/card';
@@ -27,11 +28,13 @@ class Player {
             return;
         }
         if (this.is_playing && this.playing_card === card) {
-            this.stop()
+            this.stop();
+            hide_panel();
             return;
         }
         if (this.is_playing) {
-            this.stop()
+            this.stop();
+            hide_panel();
         }
         this.play(card)
     }
@@ -48,6 +51,7 @@ class Player {
                 this.is_loading = false;
                 card.set_loaded_song();
                 this.sound.play();
+                show_panel();
             }
         })
     }
@@ -64,7 +68,29 @@ let cards: Array<Card> = [];
 let player = new Player(50);
 
 const content = document.getElementById('content');
+const panel = <HTMLElement>document.querySelector('#info-panel');
 
+let show_panel = () => {
+    panel.querySelector("#info-now-playing").innerHTML = player.playing_card.current_artist + " " + player.playing_card.current_song;
+    panel.querySelector("#info-song-title").innerHTML = player.playing_card.title;
+    document.getElementById("info-dummy").style.backgroundColor = player.playing_card.color;
+    document.getElementById("info-panel-box").style.backgroundColor = player.playing_card.color;
+    anime({
+        targets: panel,
+        bottom: "0",
+        duration: 300,
+        easing: "easeOutQuart"
+    })
+}
+
+let hide_panel = () => {
+    anime({
+        targets: panel,
+        bottom: "-4em",
+        duration: 300,
+        easing: "easeOutQuart"
+    })
+}
 
 let parse_data = () => {
     const json = require(path.resolve('src/data/stations.json'))

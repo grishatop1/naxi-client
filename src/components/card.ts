@@ -28,24 +28,35 @@ export class Card {
     set_loaded_song() {
         this.node.querySelector('img').src = '/stop.svg'
         this.start_pulsing_animation()
+        this.is_playing = true;
     }
     set_normal() {
         this.node.querySelector('img').src = '/play.svg'
         this.stop_pulsing_animation()
+        this.is_playing = false;
     }
     setup_metadata_fetching() {
-        setInterval(() => {
+        setInterval(async () => {
             if (is_element_in_viewport(this.node)) {
-                this.set_metadata()
+                const data = await this.set_metadata()
+                if (this.is_playing) {
+                    document.querySelector('#info-now-playing').innerHTML = data;
+                }
             }
         }, 3000)
     }
     async set_metadata() {
         const data = await fetch_metadata(this.metadata_url);
         if (data) {
-            this.node.querySelector('#now_playing').innerHTML = data;
+            this.current_artist = data.artist;
+            this.current_song = data.song;
+            this.node.querySelector('#now_playing').innerHTML = data.artist + " " + data.song;
+            return data.artist + " " + data.song;
         } else {
+            this.current_artist = "Naxi Radio";
+            this.current_song = this.title;
             this.node.querySelector('#now_playing').innerHTML = `Naxi Radio - ${this.title}`;
+            return `Naxi Radio - ${this.title}`;
         }
     }
     start_pulsing_animation() {

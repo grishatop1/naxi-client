@@ -33,8 +33,15 @@ export let fetch_metadata = async (url) => {
 	const artist = parsed.querySelector(".details p span").innerHTML + " ";
 	const song = [].reduce.call(parsed.querySelector(".details p").childNodes, function (a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
 
-	const result = artist + song
-	return result.trim();
+	const test = song + artist;
+	if (test.trim() == "") {
+		return null;
+	}
+	
+	return {
+		artist: artist.trim(),
+		song: song.trim()
+	}
 }
 
 export function is_element_in_viewport(el) {

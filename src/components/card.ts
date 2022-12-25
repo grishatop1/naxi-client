@@ -1,4 +1,4 @@
-import { fetch_metadata, is_element_in_viewport } from "./utils"
+import { fetch_metadata, is_element_in_viewport, hexToRgb } from "./utils"
 
 export class Card {
     node?: HTMLElement
@@ -10,6 +10,7 @@ export class Card {
     color: string
     url: string
     metadata_url: string
+    animationPulsing?: Animation
     constructor(title: string, color: string, url: string, metadata_url: string) {
         this.title = title;
         this.is_loading = true;
@@ -17,7 +18,7 @@ export class Card {
         this.color = color;
         this.url = url;
         this.metadata_url = metadata_url;
-        
+
         this.set_metadata();
         this.setup_metadata_fetching();
     }
@@ -26,9 +27,11 @@ export class Card {
     }
     set_loaded_song() {
         this.node.querySelector('img').src = '/stop.svg'
+        this.start_pulsing_animation()
     }
     set_normal() {
         this.node.querySelector('img').src = '/play.svg'
+        this.stop_pulsing_animation()
     }
     setup_metadata_fetching() {
         setInterval(() => {
@@ -44,6 +47,24 @@ export class Card {
         } else {
             this.node.querySelector('#now_playing').innerHTML = `Naxi Radio - ${this.title}`;
         }
+    }
+    start_pulsing_animation() {
+        let colorRGB = hexToRgb(this.color)
+        const keyframes = [
+            { boxShadow: `0 0 0px 0px rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, 0.8)` },
+            { boxShadow: `0 0 0px 10px rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, 0)` },
+            { boxShadow: `0 0 0px 10px rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, 0)` },
+        ];
+
+        const timing = {
+            duration: 1000,
+            iterations: Infinity
+        };
+
+        this.animationPulsing = this.node.animate(keyframes, timing);
+    }
+    stop_pulsing_animation() {
+        this.animationPulsing.cancel()
     }
 }
 

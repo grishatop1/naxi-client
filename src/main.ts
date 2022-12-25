@@ -55,6 +55,7 @@ class Player {
             autoLoad: true,
             volume: this.volume,
             onload: () => {
+                if (!this.sound.loaded) return;
                 this.playing_card = card;
                 this.is_playing = true;
                 this.is_loading = false;
@@ -62,6 +63,10 @@ class Player {
                 this.sound.play();
                 show_panel();
                 document.title = `Naxi ${this.playing_card.title} | ${this.playing_card.current_artist} ${this.playing_card.current_song}`
+            },
+            onerror: () => {
+                card.set_errored();
+                this.is_loading = false;
             }
         })
     }

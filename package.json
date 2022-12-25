@@ -13,6 +13,7 @@
   "devDependencies": {
     "@types/animejs": "^3.1.6",
     "@types/soundmanager2": "^2.97.4",
+    "@types/toastify-js": "^1.11.1",
     "autoprefixer": "^10.4.13",
     "electron": "^19.0.6",
     "electron-builder": "^23.1.0",
@@ -24,6 +25,7 @@
   },
   "dependencies": {
     "animejs": "^3.2.1",
-    "soundmanager2": "^2.97.20170602"
+    "soundmanager2": "^2.97.20170602",
+    "toastify-js": "^1.12.0"
   }
 }

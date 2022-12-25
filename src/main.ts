@@ -23,7 +23,7 @@ let createCategorySection = (category: string) => {
     let content = document.createElement('div')
     element.className = 'mt-10 mb-10 ml-10 tablet:m-10 tablet:my-20'
     title.innerHTML = category
-    title.className = 'text-4xl m-3 tablet:m-5 tablet-xl:text-center'
+    title.className = 'text-4xl m-3 tablet:m-5 tablet-xl:text-center dark:text-white'
     content.className = 'flex flex-wrap tablet-xl:justify-center'
     element.appendChild(title)
     element.appendChild(content)
@@ -166,5 +166,19 @@ volume_slider.addEventListener('input', () => {
     const value = 100 + parseInt(volume_slider.value);
     currentSound.setVolume(value);
 })
+
+
+let theme = "light";
+const theme_btn = document.getElementById('theme-btn');
+theme_btn.addEventListener('click', () => {
+    if (theme === "light") {
+        document.documentElement.classList.add("dark")
+        theme = "dark";
+    } else {
+        document.documentElement.classList.remove("dark")
+        theme = "light";
+    }
+    
+});
 
 parseData(json_data);

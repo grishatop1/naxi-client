@@ -43,6 +43,9 @@ export class Card {
                     document.querySelector('#info-now-playing').innerHTML = data;
                 }
             }
+            if (this.is_playing) {
+                document.title = `Naxi ${this.title} | ${this.current_artist} ${this.current_song}`
+            }
         }, 3000)
     }
     async set_metadata() {

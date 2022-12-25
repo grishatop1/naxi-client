@@ -61,6 +61,7 @@ class Player {
                 card.set_loaded_song();
                 this.sound.play();
                 show_panel();
+                document.title = `Naxi ${this.playing_card.title} | ${this.playing_card.current_artist} ${this.playing_card.current_song}`
             }
         })
     }
@@ -70,6 +71,7 @@ class Player {
         this.playing_card = null;
         this.sound.stop();
         this.sound.destruct();
+        document.title = `Naxi Radio`
     }
 }
 

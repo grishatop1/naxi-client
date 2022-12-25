@@ -1,4 +1,6 @@
 import path from 'path';
+
+import { enableThemeSwitching } from './components/theme';
 import { createCardElement, Card } from './components/card';
 import { createCategoryElement } from './components/category';
 
@@ -61,6 +63,7 @@ let player = new Player(50);
 
 const content = document.getElementById('content');
 
+
 let parse_data = () => {
     const json = require(path.resolve('src/data/stations.json'))
     for (const [category_title, genres] of Object.entries(json.Kategorije)) {
@@ -91,4 +94,5 @@ let add_event_listeners = () => {
 document.addEventListener('DOMContentLoaded', () => {
     parse_data();
     add_event_listeners();
+    enableThemeSwitching();
 });

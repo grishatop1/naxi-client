@@ -201,7 +201,7 @@ theme_btn.addEventListener('click', () => {
         })
         anime({
             targets: "#theme-btn",
-            backgroundColor: "#000"
+            backgroundColor: "#202029"
         })
     }
     

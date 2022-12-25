@@ -1,3 +1,5 @@
+import { fetch_metadata, is_element_in_viewport } from "./utils"
+
 export class Card {
     node?: HTMLElement
     title: string
@@ -15,15 +17,33 @@ export class Card {
         this.color = color;
         this.url = url;
         this.metadata_url = metadata_url;
+        
+        this.set_metadata();
+        this.setup_metadata_fetching();
     }
-    setLoadingSong() {
+    set_loading_song() {
         this.node.querySelector('img').src = '/loading.svg'
     }
-    setLoadedSong() {
+    set_loaded_song() {
         this.node.querySelector('img').src = '/stop.svg'
     }
-    setNormal() {
+    set_normal() {
         this.node.querySelector('img').src = '/play.svg'
+    }
+    setup_metadata_fetching() {
+        setInterval(() => {
+            if (is_element_in_viewport(this.node)) {
+                this.set_metadata()
+            }
+        }, 3000)
+    }
+    async set_metadata() {
+        const data = await fetch_metadata(this.metadata_url);
+        if (data) {
+            this.node.querySelector('#now_playing').innerHTML = data;
+        } else {
+            this.node.querySelector('#now_playing').innerHTML = `Naxi Radio - ${this.title}`;
+        }
     }
 }
 
@@ -44,7 +64,7 @@ export const createCardElement = (card: Card) => {
 
     now_playing.innerHTML = 'Loading...'
     now_playing.className = 'text-white ml-2 z-[0] now-playing select-none relative whitespace-nowrap'
-    now_playing.id = 'now-playing'
+    now_playing.id = 'now_playing'
 
     dummy_1.className = 'brightness-75 absolute w-[15em] h-[8em] rotate-12 top-[100px] left-[150px]'
     dummy_1.style.backgroundColor = card.color;

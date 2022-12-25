@@ -34,7 +34,7 @@ class Player {
         this.play(card)
     }
     play(card: Card) {
-        card.setLoadingSong();
+        card.set_loading_song();
         this.sound = soundManager.createSound({
             url: card.url,
             autoLoad: true,
@@ -42,13 +42,13 @@ class Player {
             onload: () => {
                 this.playing_card = card;
                 this.is_playing = true;
-                card.setLoadedSong();
+                card.set_loaded_song();
                 this.sound.play();
             }
         })
     }
     stop() {
-        this.playing_card.setNormal()
+        this.playing_card.set_normal()
         this.is_playing = false;
         this.playing_card = null;
         this.sound.stop();

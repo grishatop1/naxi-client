@@ -30,6 +30,9 @@ export class Card {
         this.start_pulsing_animation()
         this.is_playing = true;
     }
+    set_errored() {
+        this.set_normal();
+    }
     set_normal() {
         this.node.querySelector('img').src = '/play.svg'
         this.stop_pulsing_animation()

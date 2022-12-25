@@ -54,14 +54,17 @@ class Player {
             url: card.url,
             autoLoad: true,
             volume: this.volume,
-            onload: () => {
+            onplay: () => {
                 this.playing_card = card;
                 this.is_playing = true;
                 this.is_loading = false;
                 card.set_loaded_song();
-                this.sound.play();
+                //this.sound.play();
                 show_panel();
                 document.title = `Naxi ${this.playing_card.title} | ${this.playing_card.current_artist} ${this.playing_card.current_song}`
+            },
+            onerror: () => {
+                card.set_errored();
             }
         })
     }

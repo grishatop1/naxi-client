@@ -1,210 +1,135 @@
-import { createCards } from "./components/genre-card";
-import { respondToVisibility, hexToRgb } from "./utils";
-import anime from 'animejs/lib/anime.es.js';
+import path from 'path';
+import anime from 'animejs';
 
-var soundmanager2 = require("soundmanager2")
+import { enableThemeSwitching } from './components/theme';
+import { createCardElement, Card } from './components/card';
+import { createCategoryElement } from './components/category';
+
+require('soundmanager2');
 soundManager.setup({
     debugMode: false
 })
 
-var path = require('path');
-var json_data = require(path.resolve('src/data/stations.json'))
+class Player {
+    sound?: soundmanager.SMSound
+    playing_card?: Card
+    volume: number
+    volume_slider: HTMLInputElement
+    is_playing: boolean
+    is_loading: boolean
+    constructor(volume: number) {
+        this.is_loading = false;
+        this.is_playing = false;
+        this.volume_slider = <HTMLInputElement>document.getElementById('volume-slider');
+        this.volume = volume;
 
-
-let currentSound: soundmanager.SMSound = null;
-let currentURL: string = null;
-let currentCard: HTMLElement = null;
-let audioLoading: boolean = false;
-
-
-let createCategorySection = (category: string) => {
-    let element = document.createElement('section')
-    let title = document.createElement('h1')
-    let content = document.createElement('div')
-    element.className = 'mt-10 mb-10 ml-10 tablet-xl:m-10 tablet-xl:my-20'
-    title.innerHTML = category
-    title.className = 'text-4xl m-3 tablet-xl:m-5 tablet-xl:text-center dark:text-white'
-    content.className = 'flex flex-wrap tablet-xl:justify-center'
-    element.appendChild(title)
-    element.appendChild(content)
-    document.getElementById('content').appendChild(element)
-    return content
-}
-
-let parseData = (json: Object) => {
-    let cards = [];
-    for (let [category, genres] of Object.entries(json['Kategorije'])) {
-        const category_content = createCategorySection(category);
-        cards.push(...createCards(genres, category_content));
-    }
-
-    cards.forEach((card) => {
-        respondToVisibility(card[0], () => {
-            fetchMetadata(card);
-            setInterval(() => {
-                fetchMetadata(card);
-            }, 10000)
+        this.volume_slider.addEventListener('input', () => {
+            this.change_volume();
         });
-        card[0].addEventListener('click', () => {
-            if (audioLoading) {
-                return;
+    }
+    change_volume() {
+        const new_volume = parseInt(this.volume_slider.value);
+        this.sound.setVolume(new_volume);
+        this.volume = new_volume;
+    }
+    request_play(card: Card) {
+        if (this.is_loading) {
+            return;
+        }
+        if (this.is_playing && this.playing_card === card) {
+            this.stop();
+            hide_panel();
+            return;
+        }
+        if (this.is_playing) {
+            this.stop();
+            hide_panel();
+        }
+        this.play(card)
+    }
+    play(card: Card) {
+        card.set_loading_song();
+        this.is_loading = true;
+        this.sound = soundManager.createSound({
+            url: card.url,
+            autoLoad: true,
+            volume: this.volume,
+            onload: () => {
+                this.playing_card = card;
+                this.is_playing = true;
+                this.is_loading = false;
+                card.set_loaded_song();
+                this.sound.play();
+                show_panel();
             }
-            if (currentURL === card[1].url) {
-                stopAll();
-                hideInfoPanel();
-                return;
-            }
-            if (currentURL) {
-                stopAll();
-            }
-            card[0].querySelector('img').src = "/loading.svg";
-            audioLoading = true;
-            currentSound = soundManager.createSound({
-                url: card[1].url,
-                autoLoad: true,
-                volume: 50,
-                onload: () => {
-                    currentSound.play();
-
-                    currentURL = card[1].url;
-                    currentCard = card[0];
-                    audioLoading = false;
-
-                    animatePulse(card[0], card[1].color);
-                    showInfoPanel(card[1].title, card[1].color);
-                    card[0].querySelector('img').src = "/stop.svg";
-                }
-            });
         })
-    });
+    }
+    stop() {
+        this.playing_card.set_normal()
+        this.is_playing = false;
+        this.playing_card = null;
+        this.sound.stop();
+        this.sound.destruct();
+    }
 }
 
-setInterval(() => {
-    if (currentCard) {
-        info_panel.querySelector("#info-now-playing").innerHTML = currentCard.querySelector("#now-playing").innerHTML;
-    }
-}, 5000)
+let cards: Array<Card> = [];
+let player = new Player(50);
 
-const info_panel = document.querySelector("#info-panel")
-let showInfoPanel = (genre: string, color: string) => {
-    info_panel.querySelector("#info-song-title").innerHTML = genre;
-    info_panel.querySelector("#info-now-playing").innerHTML = currentCard.querySelector("#now-playing").innerHTML;
-    document.getElementById("info-dummy").style.backgroundColor = color;
-    document.getElementById("info-panel-box").style.backgroundColor = color;
+const content = document.getElementById('content');
+const panel = <HTMLElement>document.querySelector('#info-panel');
+
+let show_panel = () => {
+    panel.querySelector("#info-now-playing").innerHTML = player.playing_card.current_artist + " " + player.playing_card.current_song;
+    panel.querySelector("#info-song-title").innerHTML = player.playing_card.title;
+    document.getElementById("info-dummy").style.backgroundColor = player.playing_card.color;
+    document.getElementById("info-panel-box").style.backgroundColor = player.playing_card.color;
     anime({
-        targets: info_panel,
+        targets: panel,
         bottom: "0",
         duration: 300,
         easing: "easeOutQuart"
     })
 }
 
-let hideInfoPanel = () => {
+let hide_panel = () => {
     anime({
-        targets: info_panel,
-        bottom: "-5em",
+        targets: panel,
+        bottom: "-4em",
         duration: 300,
         easing: "easeOutQuart"
     })
 }
 
-var animationPulsing: Animation = null;
-let animatePulse = (element: HTMLElement, color: string) => {
-    let colorRGB = hexToRgb(color)
-    const keyframes = [
-        { boxShadow: `0 0 0px 0px rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, 0.8)` },
-        { boxShadow: `0 0 0px 10px rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, 0)` },
-        { boxShadow: `0 0 0px 10px rgba(${colorRGB.r}, ${colorRGB.g}, ${colorRGB.b}, 0)` },
-    ];
-
-    const timing = {
-        duration: 1000,
-        iterations: Infinity
-    };
-
-    animationPulsing = element.animate(keyframes, timing);
-}
-
-let stopAnimatePulse = () => {
-    animationPulsing.cancel()
-}
-
-let fetchMetadata = (card: object) => {
-    fetch(card[1].metadata)
-        .then((response) => response.json())
-        .then((data) => {
-            const unparsed_html = data['rs']
-            const parsed = new DOMParser().parseFromString(unparsed_html, "text/xml");
-
-            const artist = parsed.querySelector(".details p span").innerHTML + " ";
-            const song = [].reduce.call(parsed.querySelector(".details p").childNodes, function (a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
-
-            const result = artist + song
-
-            if (result.trim() == "") {
-                card[0].querySelector('#now-playing').innerHTML = "Naxi Radio - " + card[1].title;
-            } else {
-                card[0].querySelector('#now-playing').innerHTML = result;
-            }
-
-        });
-}
-
-let stopAll = () => {
-    currentSound.stop();
-    currentCard.querySelector('img').src = "/play.svg";
-    currentCard.classList.remove('pulsing');
-    currentURL = null;
-    currentSound.destruct();
-    currentSound = null;
-    currentCard = null;
-    stopAnimatePulse();
-}
-
-const volume_slider = <HTMLInputElement>document.getElementById('volume-slider');
-volume_slider.addEventListener('input', () => {
-    const value = 100 + parseInt(volume_slider.value);
-    currentSound.setVolume(value);
-})
-
-
-let theme = "light";
-const theme_btn = document.getElementById('theme-btn');
-theme_btn.addEventListener('click', () => {
-    if (theme === "light") {
-        document.documentElement.classList.add("dark")
-        theme = "dark";
-        
-        anime({
-            targets: "#moon",
-            translateX: "-3em"
-        })
-        anime({
-            targets: "#sun",
-            translateX: "0em"
-        })
-        anime({
-            targets: "#theme-btn",
-            backgroundColor: "#fff"
-        })
-    } else {
-        document.documentElement.classList.remove("dark")
-        theme = "light";
-
-        anime({
-            targets: "#moon",
-            translateX: "0em"
-        })
-        anime({
-            targets: "#sun",
-            translateX: "3em"
-        })
-        anime({
-            targets: "#theme-btn",
-            backgroundColor: "#202029"
-        })
+let parse_data = () => {
+    const json = require(path.resolve('src/data/stations.json'))
+    for (const [category_title, genres] of Object.entries(json.Kategorije)) {
+        const category_node = createCategoryElement(category_title);
+        for (const [card_title, data] of Object.entries(genres)) {
+            const card = new Card(
+                card_title, 
+                data.color, 
+                data.url, 
+                data.metadata
+            )
+            card.node = createCardElement(card);
+            category_node.querySelector(".card-content").appendChild(card.node);
+            cards.push(card);
+        }
+        content.appendChild(category_node);
     }
-    
-});
+}
 
-parseData(json_data);
+let add_event_listeners = () => {
+    cards.forEach(card => {
+        card.node.addEventListener('click', () => {
+            player.request_play(card);
+        });
+    })
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    parse_data();
+    add_event_listeners();
+    enableThemeSwitching();
+});

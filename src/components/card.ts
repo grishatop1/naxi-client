@@ -16,6 +16,15 @@ export class Card {
         this.url = url;
         this.metadata_url = metadata_url;
     }
+    setLoadingSong() {
+        this.node.querySelector('img').src = '/loading.svg'
+    }
+    setLoadedSong() {
+        this.node.querySelector('img').src = '/stop.svg'
+    }
+    setNormal() {
+        this.node.querySelector('img').src = '/play.svg'
+    }
 }
 
 export const createCardElement = (card: Card) => {

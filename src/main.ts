@@ -8,27 +8,51 @@ soundManager.setup({
 })
 
 class Player {
-    sound: soundmanager.SMSound
-    playing_card: Card
+    sound?: soundmanager.SMSound
+    playing_card?: Card
     volume: number
     volume_slider: HTMLElement
     is_playing: boolean
+    is_loading: boolean
     constructor(volume: number) {
+        this.is_loading = false;
+        this.is_playing = false;
         this.volume_slider = document.getElementById('volume-slider');
         this.volume = volume;
     }
-    requestPlay(card: Card) {
-        //If nothing is playing
-        if (!this.is_playing) {
-            this.sound = soundManager.createSound({
-                url: card.url,
-                autoLoad: true,
-                volume: this.volume,
-                onload: () => {
-                    this.sound.play();
-                }
-            })
+    request_play(card: Card) {
+        if (this.is_loading) {
+            return;
         }
+        if (this.is_playing && this.playing_card === card) {
+            this.stop()
+            return;
+        }
+        if (this.is_playing) {
+            this.stop()
+        }
+        this.play(card)
+    }
+    play(card: Card) {
+        card.setLoadingSong();
+        this.sound = soundManager.createSound({
+            url: card.url,
+            autoLoad: true,
+            volume: this.volume,
+            onload: () => {
+                this.playing_card = card;
+                this.is_playing = true;
+                card.setLoadedSong();
+                this.sound.play();
+            }
+        })
+    }
+    stop() {
+        this.playing_card.setNormal()
+        this.is_playing = false;
+        this.playing_card = null;
+        this.sound.stop();
+        this.sound.destruct();
     }
 }
 
@@ -59,7 +83,7 @@ let parse_data = () => {
 let add_event_listeners = () => {
     cards.forEach(card => {
         card.node.addEventListener('click', () => {
-            player.requestPlay(card);
+            player.request_play(card);
         });
     })
 }

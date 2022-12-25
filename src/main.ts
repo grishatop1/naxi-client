@@ -104,7 +104,7 @@ let hide_panel = () => {
 let parse_data = () => {
     const json = require(path.resolve('src/data/stations.json'))
     for (const [category_title, genres] of Object.entries(json.Kategorije)) {
-        const categoy_node = createCategoryElement(category_title);
+        const category_node = createCategoryElement(category_title);
         for (const [card_title, data] of Object.entries(genres)) {
             const card = new Card(
                 card_title, 
@@ -113,10 +113,10 @@ let parse_data = () => {
                 data.metadata
             )
             card.node = createCardElement(card);
-            categoy_node.appendChild(card.node);
+            category_node.querySelector(".card-content").appendChild(card.node);
             cards.push(card);
         }
-        content.appendChild(categoy_node);
+        content.appendChild(category_node);
     }
 }
 

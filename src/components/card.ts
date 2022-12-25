@@ -1,3 +1,6 @@
+import Toastify from 'toastify-js'
+import "toastify-js/src/toastify.css"
+
 import { fetch_metadata, is_element_in_viewport, hexToRgb } from "./utils"
 
 export class Card {
@@ -5,6 +8,7 @@ export class Card {
     title: string
     is_loading: boolean
     is_playing: boolean
+    is_loading_metadata: boolean
     current_artist?: string
     current_song?: string
     color: string
@@ -15,6 +19,7 @@ export class Card {
         this.title = title;
         this.is_loading = true;
         this.is_playing = false;
+        this.is_loading_metadata = false;
         this.color = color;
         this.url = url;
         this.metadata_url = metadata_url;
@@ -31,7 +36,15 @@ export class Card {
         this.is_playing = true;
     }
     set_errored() {
-        this.set_normal();
+        this.is_playing = false;
+        this.node.querySelector('img').src = '/play.svg'
+        Toastify({
+            text: "Network error",
+            duration: 3000,
+            newWindow: true,
+            gravity: "top",
+            position: "left"
+        }).showToast()
     }
     set_normal() {
         this.node.querySelector('img').src = '/play.svg'
@@ -40,8 +53,11 @@ export class Card {
     }
     setup_metadata_fetching() {
         setInterval(async () => {
+            if (this.is_loading_metadata) return;
             if (this.is_playing) {
+                this.is_loading_metadata = true;
                 const data = await this.set_metadata()
+                this.is_loading_metadata = false;
                 document.querySelector('#info-now-playing').innerHTML = data;
                 document.title = `Naxi ${this.title} | ${this.current_artist} ${this.current_song}`
                 return;

@@ -37,14 +37,14 @@ export class Card {
     }
     setup_metadata_fetching() {
         setInterval(async () => {
-            if (is_element_in_viewport(this.node)) {
-                const data = await this.set_metadata()
-                if (this.is_playing) {
-                    document.querySelector('#info-now-playing').innerHTML = data;
-                }
-            }
             if (this.is_playing) {
+                const data = await this.set_metadata()
+                document.querySelector('#info-now-playing').innerHTML = data;
                 document.title = `Naxi ${this.title} | ${this.current_artist} ${this.current_song}`
+                return;
+            }
+            if (is_element_in_viewport(this.node)) {
+                await this.set_metadata()
             }
         }, 3000)
     }

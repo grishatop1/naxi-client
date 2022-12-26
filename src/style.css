@@ -13,6 +13,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.title-bar {
+  backdrop-filter: blur(5px); 
+}
+
 :root {
   font-family: TeX, sans-serif;
   font-size: 16px;

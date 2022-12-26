@@ -87,7 +87,11 @@ export class Card {
         if (!this.current_song && !this.current_artist) {
             play_string = `Naxi Radio - ${this.title}`
         } else {
-            play_string = `${this.current_artist} - ${this.current_song}`
+            if (this.current_song) {
+                play_string = `${this.current_artist} - ${this.current_song}`
+            } else {
+                play_string = `${this.current_artist}`
+            }
             play_title_string = `Naxi ${this.title} | ${this.current_artist} - ${this.current_song}`
         }
         return {

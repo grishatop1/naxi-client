@@ -1,7 +1,7 @@
 import Toastify from 'toastify-js'
 import "toastify-js/src/toastify.css"
 
-import { fetch_metadata, is_element_in_viewport, hexToRgb } from "./utils"
+import { is_element_in_viewport, hexToRgb } from "./utils"
 
 export class Card {
     node?: HTMLElement
@@ -24,7 +24,8 @@ export class Card {
         this.url = url;
         this.metadata_url = metadata_url;
 
-        this.set_metadata();
+        this.fetch_startup();
+        this.update_metadata_card();
         this.setup_metadata_fetching();
     }
     set_loading_song() {
@@ -34,6 +35,7 @@ export class Card {
         this.node.querySelector('img').src = '/stop.svg'
         this.start_pulsing_animation()
         this.is_playing = true;
+        this.update_metadata_everywhere();
     }
     set_errored() {
         this.is_playing = false;
@@ -51,34 +53,65 @@ export class Card {
         this.stop_pulsing_animation()
         this.is_playing = false;
     }
-    setup_metadata_fetching() {
+    async fetch_startup() {
+        await this.fetch_metadata();
+        this.update_metadata_card();
+    }
+    async setup_metadata_fetching() {
         setInterval(async () => {
             if (this.is_loading_metadata) return;
             if (this.is_playing) {
-                this.is_loading_metadata = true;
-                const data = await this.set_metadata()
-                this.is_loading_metadata = false;
-                document.querySelector('#info-now-playing').innerHTML = data;
-                document.title = `Naxi ${this.title} | ${this.current_artist} ${this.current_song}`
+                await this.fetch_metadata();
+                this.update_metadata_everywhere()
                 return;
             }
             if (is_element_in_viewport(this.node)) {
-                await this.set_metadata()
+                await this.fetch_metadata();
+                this.update_metadata_card();
             }
         }, 3000)
     }
-    async set_metadata() {
-        const data = await fetch_metadata(this.metadata_url);
-        if (data) {
-            this.current_artist = data.artist;
-            this.current_song = data.song;
-            this.node.querySelector('#now_playing').innerHTML = data.artist + " " + data.song;
-            return data.artist + " " + data.song;
+    async update_metadata_everywhere() {
+        const meta = await this.get_playstrings();
+        this.node.querySelector('#now_playing').innerHTML = meta.play_string;
+        document.querySelector('#info-now-playing').innerHTML = meta.play_string;
+        document.title = meta.play_title_string;
+    }
+    async update_metadata_card() {
+        const meta = await this.get_playstrings();
+        this.node.querySelector('#now_playing').innerHTML = meta.play_string;
+    }
+    async get_playstrings() {
+        let play_string: string = "";
+        let play_title_string: string = "";
+        if (!this.current_song && !this.current_artist) {
+            play_string = `Naxi Radio - ${this.title}`
         } else {
-            this.current_artist = "Naxi Radio";
-            this.current_song = this.title;
-            this.node.querySelector('#now_playing').innerHTML = `Naxi Radio - ${this.title}`;
-            return `Naxi Radio - ${this.title}`;
+            if (this.current_song) {
+                play_string = `${this.current_artist} - ${this.current_song}`
+            } else {
+                play_string = `${this.current_artist}`
+            }
+            play_title_string = `Naxi ${this.title} | ${this.current_artist} - ${this.current_song}`
+        }
+        return {
+            play_string: play_string,
+            play_title_string: play_title_string
+        }
+    }
+    async fetch_metadata() {
+        try {
+            let request = await fetch(this.metadata_url);
+            let data = await request.json();
+            const unparsed_html = data['rs']
+            const parsed = new DOMParser().parseFromString(unparsed_html, "text/xml");
+            const artist = parsed.querySelector(".details p span").innerHTML + " ";
+            const song = [].reduce.call(parsed.querySelector(".details p").childNodes, function (a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
+            this.current_artist = artist.trim();
+            this.current_song = song.trim().slice(2);
+        } catch {
+            this.current_artist = null;
+            this.current_song = null;
         }
     }
     start_pulsing_animation() {

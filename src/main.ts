@@ -72,7 +72,6 @@ class Player {
                 card.set_loaded_song();
                 this.sound.play();
                 show_panel();
-                document.title = `Naxi ${this.playing_card.title} | ${this.playing_card.current_artist} ${this.playing_card.current_song}`
             },
             onerror: () => {
                 card.set_errored();
@@ -97,7 +96,6 @@ const content = document.getElementById('content');
 const panel = <HTMLElement>document.querySelector('#info-panel');
 
 let show_panel = () => {
-    panel.querySelector("#info-now-playing").innerHTML = player.playing_card.current_artist + " " + player.playing_card.current_song;
     panel.querySelector("#info-song-title").innerHTML = player.playing_card.title;
     document.getElementById("info-dummy").style.backgroundColor = player.playing_card.color;
     document.getElementById("info-panel-box").style.backgroundColor = player.playing_card.color;

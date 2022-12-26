@@ -149,7 +149,7 @@ let add_categories = () => {
     for (const [category_title, _] of Object.entries(json.Kategorije)) {
         const category_btn = document.createElement('div');
         category_btn.innerHTML = category_title;
-        category_btn.className = 'select-none cursor-pointer py-2 px-5 hover:bg-gray-200 rounded-lg dark:bg-[#3c3c4a] dark:text-white dark:hover:bg-gray-600';
+        category_btn.className = 'select-none cursor-pointer py-2 px-5 tablet-xl:px-3 hover:bg-gray-200 rounded-lg dark:bg-[#3c3c4a] dark:text-white dark:hover:bg-gray-600';
         categories_node.appendChild(category_btn);
         category_btn.addEventListener('click', () => {
             scroll_to_category(category_title);

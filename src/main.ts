@@ -48,12 +48,10 @@ class Player {
         }
         if (this.is_playing && this.playing_card === card) {
             this.stop();
-            hide_panel();
             return;
         }
         if (this.is_playing) {
             this.stop();
-            hide_panel();
         }
         this.play(card)
     }
@@ -86,6 +84,7 @@ class Player {
         this.sound.stop();
         this.sound.destruct();
         document.title = `Naxi Radio`
+        hide_panel();
     }
 }
 
@@ -165,6 +164,14 @@ let scroll_to_category = (category: string) => {
         duration: 200
     })
 }
+
+//Media player stuff
+navigator.mediaSession.setActionHandler("pause", () => {
+    player.stop()
+});
+navigator.mediaSession.setActionHandler("stop", () => {
+    player.stop()
+});
 
 document.addEventListener('DOMContentLoaded', () => {
     parse_data();

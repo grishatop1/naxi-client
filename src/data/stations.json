@@ -7,7 +7,7 @@
                 "metadata": "https://www.naxi.rs/stations/rs-naxi.json"
             }
         },
-        "Domaće": {
+        "Domaće (starije)": {
             "Boem": {
                 "url": "https://naxidigital-boem128ssl.streaming.rs:8162/;stream.nsv",
                 "color": "#caa013",
@@ -19,11 +19,28 @@
                 "metadata": "https://www.naxi.rs/stations/rs-slager.json"
             }
         },
+        "Domaće (novije)": {
+            "Hype": {
+                "url": "https://naxidigital-hype128ssl.streaming.rs:8272/;stream.nsv",
+                "color": "#5821b8",
+                "metadata": "https://www.naxi.rs/stations/rs-hype.json"
+            }
+        },
         "Chill": {
             "Cafe": {
                 "url": "https://naxidigital-cafe128ssl.streaming.rs:8022/;stream.nsv",
                 "color": "#f08c13",
                 "metadata": "https://www.naxi.rs/stations/rs-cafe.json"
+            },
+            "Chillwave": {
+                "url": "https://naxidigital-chillwave128ssl.streaming.rs:8322/;stream.nsv",
+                "color": "#d81fde",
+                "metadata": "https://www.naxi.rs/stations/rs-chillwave.json"
+            },
+            "Classic": {
+                "url": "https://naxidigital-classic128ssl.streaming.rs:8032/;stream.nsv",
+                "color": "#a8a803",
+                "metadata": "https://www.naxi.rs/stations/rs-classic.json"
             },
             "Evergreen": {
                 "url": "https://naxidigital-evergreen128ssl.streaming.rs:8012/;stream.nsv",
@@ -35,25 +52,15 @@
                 "color": "#9900cc",
                 "metadata": "https://www.naxi.rs/stations/rs-funk.json"
             },
-            "Lounge": {
-                "url": "https://naxidigital-lounge128ssl.streaming.rs:8252/;stream.nsv",
-                "color": "#d96400",
-                "metadata": "https://www.naxi.rs/stations/rs-lounge.json"
-            },
             "Jazz": {
                 "url": "https://naxidigital-jazz128ssl.streaming.rs:8172/;stream.nsv",
                 "color": "#996c31",
                 "metadata": "https://www.naxi.rs/stations/rs-jazz.json"
             },
-            "Classic": {
-                "url": "https://naxidigital-classic128ssl.streaming.rs:8032/;stream.nsv",
-                "color": "#a8a803",
-                "metadata": "https://www.naxi.rs/stations/rs-classic.json"
-            },
-            "Chillwave": {
-                "url": "https://naxidigital-chillwave128ssl.streaming.rs:8322/;stream.nsv",
-                "color": "#d81fde",
-                "metadata": "https://www.naxi.rs/stations/rs-chillwave.json"
+            "Lounge": {
+                "url": "https://naxidigital-lounge128ssl.streaming.rs:8252/;stream.nsv",
+                "color": "#d96400",
+                "metadata": "https://www.naxi.rs/stations/rs-lounge.json"
             },
             "Love": {
                 "url": "https://naxidigital-love128ssl.streaming.rs:8102/;stream.nsv",
@@ -67,18 +74,18 @@
             }
         },
         "Rock": {
-            "Rock": {
-                "url": "https://naxidigital-rock128ssl.streaming.rs:8182/;stream.nsv",
-                "color": "#555d61",
-                "metadata": "https://www.naxi.rs/stations/rs-rock.json"
-            },
             "Blues Rock": {
                 "url": "https://naxidigital-blues128ssl.streaming.rs:8312/;stream.nsv",
                 "color": "#344882",
                 "metadata": "https://www.naxi.rs/stations/rs-blues-rock.json"
+            },
+            "Rock": {
+                "url": "https://naxidigital-rock128ssl.streaming.rs:8182/;stream.nsv",
+                "color": "#555d61",
+                "metadata": "https://www.naxi.rs/stations/rs-rock.json"
             }
         },
-        "Strane": {
+        "RECATEGORISE-OR-RENAME": {
             "Adore": {
                 "url": "https://naxidigital-adore128ssl.streaming.rs:8332/;stream.nsv",
                 "color": "#d10054",
@@ -106,47 +113,47 @@
                 "color": "#f213d4",
                 "metadata": "https://www.naxi.rs/stations/rs-90e.json"
             },
-            "Millennium": {
-                "url": "https://naxidigital-millennium128ssl.streaming.rs:8342/;stream.nsv",
-                "color": "#b43dbd",
-                "metadata": "https://www.naxi.rs/stations/rs-millennium.json"
-            },
             "Ex Yu": {
                 "url": "https://naxidigital-exyu128ssl.streaming.rs:8242/;stream.nsv",
                 "color": "#2539f5",
                 "metadata": "https://www.naxi.rs/stations/rs-exyu.json"
+            },
+            "Disco": {
+                "url": "https://naxidigital-disco128ssl.streaming.rs:8352/;stream.nsv",
+                "color": "#94ab00",
+                "metadata": "https://www.naxi.rs/stations/rs-disco.json"
             },
             "Gold": {
                 "url": "https://naxidigital-gold128ssl.streaming.rs:8062/;stream.nsv",
                 "color": "#ea542c",
                 "metadata": "https://www.naxi.rs/stations/rs-gold.json"
             },
-            "Disco": {
-                "url": "https://naxidigital-disco128ssl.streaming.rs:8352/;stream.nsv",
-                "color": "#94ab00",
-                "metadata": "https://www.naxi.rs/stations/rs-disco.json"
+            "Millennium": {
+                "url": "https://naxidigital-millennium128ssl.streaming.rs:8342/;stream.nsv",
+                "color": "#b43dbd",
+                "metadata": "https://www.naxi.rs/stations/rs-millennium.json"
             }
         },
         "Dance": {
-            "Dance": {
-                "url": "https://naxidigital-dance128ssl.streaming.rs:8112/;stream.nsv",
-                "color": "#004f92",
-                "metadata": "https://www.naxi.rs/stations/rs-dance.json"
-            },
             "Clubbing": {
                 "url": "https://naxidigital-clubbing128ssl.streaming.rs:8092/;stream.nsv",
                 "color": "#00c651",
                 "metadata": "https://www.naxi.rs/stations/rs-clubbing.json"
             },
-            "Fresh": {
-                "url": "https://naxidigital-fresh128ssl.streaming.rs:8212/;stream.nsv",
-                "color": "#61c200",
-                "metadata": "https://www.naxi.rs/stations/rs-fresh.json"
+            "Dance": {
+                "url": "https://naxidigital-dance128ssl.streaming.rs:8112/;stream.nsv",
+                "color": "#004f92",
+                "metadata": "https://www.naxi.rs/stations/rs-dance.json"
             },
             "Fitness": {
                 "url": "https://naxidigital-fitness128ssl.streaming.rs:8292/;stream.nsv",
                 "color": "#b8b8b8",
                 "metadata": "https://www.naxi.rs/stations/rs-fitness.json"
+            },
+            "Fresh": {
+                "url": "https://naxidigital-fresh128ssl.streaming.rs:8212/;stream.nsv",
+                "color": "#61c200",
+                "metadata": "https://www.naxi.rs/stations/rs-fresh.json"
             },
             "House": {
                 "url": "https://naxidigital-house128ssl.streaming.rs:8002/;stream.nsv",
@@ -162,20 +169,15 @@
             }
         },
         "Ostalo": {
-            "Xmas": {
-                "url": "https://naxidigital-xmas128.streaming.rs:8392/;stream.nsv",
-                "color": "#ff3333",
-                "metadata": "https://www.naxi.rs/stations/rs-xmas.json"
-            },
             "Kids": {
                 "url": "https://naxidigital-kids128ssl.streaming.rs:8052/;stream.nsv",
                 "color": "#0cc6f2",
                 "metadata": "https://www.naxi.rs/stations/rs-kids.json"
             },
-            "Hype": {
-                "url": "https://naxidigital-hype128ssl.streaming.rs:8272/;stream.nsv",
-                "color": "#5821b8",
-                "metadata": "https://www.naxi.rs/stations/rs-hype.json"
+            "Xmas": {
+                "url": "https://naxidigital-xmas128.streaming.rs:8392/;stream.nsv",
+                "color": "#ff3333",
+                "metadata": "https://www.naxi.rs/stations/rs-xmas.json"
             }
         }
     }

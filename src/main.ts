@@ -4,6 +4,9 @@ import anime from 'animejs';
 import { enableThemeSwitching } from './components/theme';
 import { createCardElement, Card } from './components/card';
 import { createCategoryElement } from './components/category';
+import { get_coords } from './components/utils';
+
+const json = require(path.resolve('src/data/stations.json'))
 
 require('soundmanager2');
 soundManager.setup({
@@ -116,7 +119,6 @@ let hide_panel = () => {
 }
 
 let parse_data = () => {
-    const json = require(path.resolve('src/data/stations.json'))
     for (const [category_title, genres] of Object.entries(json.Kategorije)) {
         const category_node = createCategoryElement(category_title);
         for (const [card_title, data] of Object.entries(genres)) {
@@ -142,8 +144,33 @@ let add_event_listeners = () => {
     })
 }
 
+let add_categories = () => {
+    const categories_node = document.getElementById('categories');
+    for (const [category_title, _] of Object.entries(json.Kategorije)) {
+        const category_btn = document.createElement('div');
+        category_btn.innerHTML = category_title;
+        category_btn.className = 'select-none cursor-pointer py-2 px-5 tablet-xl:px-3 hover:bg-gray-200 rounded-lg dark:bg-[#3c3c4a] dark:text-white dark:hover:bg-gray-600';
+        categories_node.appendChild(category_btn);
+        category_btn.addEventListener('click', () => {
+            scroll_to_category(category_title);
+        })
+    }
+}
+
+let scroll_to_category = (category: string) => {
+    const element = <HTMLElement>document.querySelector(`[data-id="${category}"]`);
+    const scrollElement = window.document.scrollingElement || window.document.body || window.document.documentElement;
+    anime({
+        targets: scrollElement,
+        scrollTop: get_coords(element).top + element.getBoundingClientRect().height/2 - window.innerHeight/2,
+        easing: 'easeOutSine',
+        duration: 200
+    })
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     parse_data();
     add_event_listeners();
     enableThemeSwitching();
+    add_categories();
 });

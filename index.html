@@ -7,14 +7,18 @@
     <link rel="stylesheet" href="./src/style.css">
     <title>Naxi Client</title>
   </head>
-  <body class="dark:bg-[#202029]">
+  <body class="dark:bg-[#202029] overflow-x-hidden">
     <div id="app">
       <div id="theme-btn" class="fixed z-[1000] right-5 top-6 w-[2.7em] h-[2.7em] bg-[#202029] rounded-full cursor-pointer flex justify-center items-center shadow-xl group overflow-hidden">
         <img id="moon" src="/moon.svg" class="h-[1.3em] absolute select-none">
         <img id="sun" src="/sun.svg" class="h-[1.5em] absolute select-none" style="transform: translateX(3em);">
       </div>
-      <div class="title-bar sticky top-0 z-[30]">
+      <div>
         <h1 class="relative bottom-1.5 text-blue-500 dark:text-blue-300 text-7xl font-bold text-center m-5 select-none">Naxi Radio</h1>
+      </div>
+
+      <div class="sticky top-3 flex justify-center z-[100]">
+        <div id="categories" class="flex flex-row bg-white rounded-lg dark:bg-[#3c3c4a]" style="box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);"></div>
       </div>
 
       <div id="content" class="mb-[5em]">

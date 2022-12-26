@@ -34,6 +34,13 @@ class Player {
     }
     request_play(card: Card) {
         if (this.is_loading) {
+            this.playing_card.node.querySelector('img').src = '/play.svg'
+            this.sound.destruct()
+            this.sound = null;
+            this.is_loading = false;
+            if (this.playing_card !== card) {
+                this.play(card);
+            }
             return;
         }
         if (this.is_playing && this.playing_card === card) {
@@ -50,13 +57,13 @@ class Player {
     play(card: Card) {
         card.set_loading_song();
         this.is_loading = true;
+        this.playing_card = card;
         this.sound = soundManager.createSound({
             url: card.url,
             autoLoad: true,
             volume: this.volume,
             onload: () => {
                 if (!this.sound.loaded) return;
-                this.playing_card = card;
                 this.is_playing = true;
                 this.is_loading = false;
                 card.set_loaded_song();

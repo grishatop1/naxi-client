@@ -2,44 +2,41 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./src/style.css">
-    <title>Naxi Radio</title>
-
-    <link rel="prefetch" href="/play.svg" />
-    <link rel="prefetch" href="/loading.svg" />
-    <link rel="prefetch" href="/stop.svg" />
+    <title>Naxi Client</title>
   </head>
   <body class="dark:bg-[#202029]">
     <div id="app">
-      <div id="theme-btn" class="fixed z-[1000] right-5 top-5 w-[2.7em] h-[2.7em] bg-[#202029] rounded-full cursor-pointer flex justify-center items-center shadow-xl group overflow-hidden">
-        <img id="moon" src="/moon.svg" class="h-[1.2em] absolute select-none">
-        <img id="sun" src="/sun.svg" class="h-[1.3em] absolute select-none" style="transform: translateX(3em);">
+      <div id="theme-btn" class="fixed z-[1000] right-5 top-6 w-[2.7em] h-[2.7em] bg-[#202029] rounded-full cursor-pointer flex justify-center items-center shadow-xl group overflow-hidden">
+        <img id="moon" src="/moon.svg" class="h-[1.3em] absolute select-none">
+        <img id="sun" src="/sun.svg" class="h-[1.5em] absolute select-none" style="transform: translateX(3em);">
+      </div>
+      <div class="title-bar sticky top-0 z-[30]">
+        <h1 class="relative bottom-1.5 text-blue-500 dark:text-blue-300 text-7xl font-bold text-center m-5 select-none">Naxi Radio</h1>
       </div>
 
-      <h1 class="text-blue-500 dark:text-blue-300 text-7xl font-bold text-center m-5 select-none">Naxi Radio</h1>
       <div id="content" class="mb-[5em]">
-        
       </div>
       <div id="info-panel" class="info fixed bottom-[-4em] w-full h-[4em] bg-white flex items-center flex-row justify-center dark:bg-[#2a2a36]" style="box-shadow: 0px -13px 17px -17px rgba(0,0,0,0.93);">
         
         <div id="info-panel-box" class="ml-10 relative info-card rounded-xl bg-gray-400 w-[100%] h-[3em] flex items-center justify-between overflow-hidden tablet-xl:justify-center">
           <div id="info-dummy" class="brightness-[0.9] w-[300px] h-[100px] absolute left-[-230px] bg-black rotate-[-10deg] tablet-xl:hidden">
           </div>
-          <span class="text-white text-xl font-bold mx-10 whitespace-nowrap leading-normal relative" id="info-song-title">Evergreen</span>
+          <span class="text-white text-xl font-bold mx-10 whitespace-nowrap leading-normal relative select-none" id="info-song-title">Evergreen</span>
           <span class="text-white mx-10 text-center relative z-[20] relative tablet-xl:hidden" id="info-now-playing">Playing: Donny Osmond - Puppy Nesta</span>
         </div>
         
-        <div class="naxi-logo text-xl w-[20em] whitespace-nowrap text-center dark:text-white">
+        <div class="naxi-logo text-xl w-[20em] whitespace-nowrap text-center dark:text-white select-none">
           Naxi 🎵
         </div>
         
         <div class="flex flex-row w-min justify-center mr-10">
-          <div class="text-xl whitespace-nowrap mr-3 dark:text-white">
+          <div class="text-xl whitespace-nowrap mr-3 dark:text-white select-none">
               🔊
           </div>
-          <input id="volume-slider" type="range" min="0" max="100" value="50" class="range focus:border-transparent focus:ring-0"/>
+          <input id="volume-slider" type="range" min="-100" max="0" value="-50" class="range focus:border-transparent focus:ring-0"/>
         </div>
       </div>
     </div>

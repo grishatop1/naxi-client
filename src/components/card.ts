@@ -25,7 +25,6 @@ export class Card {
         this.metadata_url = metadata_url;
 
         this.fetch_startup();
-        this.update_metadata_card();
         this.setup_metadata_fetching();
     }
     set_loading_song() {

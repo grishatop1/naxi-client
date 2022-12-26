@@ -42,30 +42,6 @@ export function hexToRgb(hex) {
 	} : null;
 }
 
-export let fetch_metadata = async (url) => {
-	try {
-		let request = await fetch(url);
-		let data = await request.json();
-		const unparsed_html = data['rs']
-		const parsed = new DOMParser().parseFromString(unparsed_html, "text/xml");
-
-		const artist = parsed.querySelector(".details p span").innerHTML + " ";
-		const song = [].reduce.call(parsed.querySelector(".details p").childNodes, function (a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
-
-		const test = song + artist;
-		if (test.trim() == "") {
-			return null;
-		}
-
-		return {
-			artist: artist.trim(),
-			song: song.trim()
-		}
-	} catch {
-		return;
-	}
-}
-
 export function is_element_in_viewport(el) {
 	var top = el.offsetTop;
 	var left = el.offsetLeft;

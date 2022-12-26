@@ -76,6 +76,10 @@ export class Card {
         this.node.querySelector('#now_playing').innerHTML = meta.play_string;
         document.querySelector('#info-now-playing').innerHTML = meta.play_string;
         document.title = meta.play_title_string;
+        navigator.mediaSession.metadata = new MediaMetadata({
+            title: this.current_song,
+            artist: this.current_artist,
+        });
     }
     async update_metadata_card() {
         const meta = await this.get_playstrings();

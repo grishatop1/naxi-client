@@ -1,10 +1,22 @@
 {
     "Kategorije": {
-        "Mix": {
-            "Mix": {
-                "url": "https://naxidigital-mix128ssl.streaming.rs:8222/;stream.nsv",
-                "color": "#de2c2c",
-                "metadata": "https://www.naxi.rs/stations/rs-mix.json"
+        "Naxi": {
+            "Naxi": {
+                "url": "https://naxi128ssl.streaming.rs:9152/;stream.nsv",
+                "color": "#0098d2",
+                "metadata": "https://www.naxi.rs/stations/rs-naxi.json"
+            }
+        },
+        "Domaće": {
+            "Boem": {
+                "url": "https://naxidigital-boem128ssl.streaming.rs:8162/;stream.nsv",
+                "color": "#caa013",
+                "metadata": "https://www.naxi.rs/stations/rs-boem.json"
+            },
+            "Šlager": {
+                "url": "https://naxidigital-slager128ssl.streaming.rs:8372/;stream.nsv",
+                "color": "#cc8e39",
+                "metadata": "https://www.naxi.rs/stations/rs-slager.json"
             }
         },
         "Chill": {
@@ -47,6 +59,11 @@
                 "url": "https://naxidigital-love128ssl.streaming.rs:8102/;stream.nsv",
                 "color": "#f06eaa",
                 "metadata": "https://www.naxi.rs/stations/rs-love.json"
+            },
+            "R'n'B": {
+                "url": "https://naxidigital-rnb128ssl.streaming.rs:8122/;stream.nsv",
+                "color": "#5398f2",
+                "metadata": "https://www.naxi.rs/stations/rs-rnb.json"
             }
         },
         "Rock": {
@@ -123,7 +140,7 @@
             },
             "Fresh": {
                 "url": "https://naxidigital-fresh128ssl.streaming.rs:8212/;stream.nsv",
-                "color": "#6edb00",
+                "color": "#61c200",
                 "metadata": "https://www.naxi.rs/stations/rs-fresh.json"
             },
             "Fitness": {
@@ -135,28 +152,13 @@
                 "url": "https://naxidigital-house128ssl.streaming.rs:8002/;stream.nsv",
                 "color": "#8dc73f",
                 "metadata": "https://www.naxi.rs/stations/rs-house.json"
-            },
-            "R'n'B": {
-                "url": "https://naxidigital-rnb128ssl.streaming.rs:8122/;stream.nsv",
-                "color": "#5398f2",
-                "metadata": "https://www.naxi.rs/stations/rs-rnb.json"
             }
         },
-        "Domaće": {
-            "Naxi": {
-                "url": "https://naxi128ssl.streaming.rs:9152/;stream.nsv",
-                "color": "#0098d2",
-                "metadata": "https://www.naxi.rs/stations/rs-naxi.json"
-            },
-            "Boem": {
-                "url": "https://naxidigital-boem128ssl.streaming.rs:8162/;stream.nsv",
-                "color": "#caa013",
-                "metadata": "https://www.naxi.rs/stations/rs-boem.json"
-            },
-            "Šlager": {
-                "url": "https://naxidigital-slager128ssl.streaming.rs:8372/;stream.nsv",
-                "color": "#cc8e39",
-                "metadata": "https://www.naxi.rs/stations/rs-slager.json"
+        "Mix": {
+            "Mix": {
+                "url": "https://naxidigital-mix128ssl.streaming.rs:8222/;stream.nsv",
+                "color": "#de2c2c",
+                "metadata": "https://www.naxi.rs/stations/rs-mix.json"
             }
         },
         "Ostalo": {

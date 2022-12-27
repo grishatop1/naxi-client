@@ -11,7 +11,7 @@ process.env.DIST = join(__dirname, '..')
 process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST, '../public')
 
 import { join } from 'path'
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, nativeImage} from 'electron'
 
 let win: BrowserWindow | null
 // Here, you can also use other preload
@@ -21,9 +21,13 @@ const url = process.env['VITE_DEV_SERVER_URL']
 
 process.env['ELECTRON_DISABLE_SECURITY_WARNINGS'] = 'true';
 
+const image_icon = nativeImage.createFromPath(
+  app.getAppPath() + "/public/naxi.png"
+);
+
 function createWindow() {
   win = new BrowserWindow({
-    icon: join(process.env.PUBLIC, 'logo.svg'),
+    icon: image_icon,
     webPreferences: {
       contextIsolation: false,
       nodeIntegration: true,
@@ -35,6 +39,8 @@ function createWindow() {
     minHeight: 420,
     autoHideMenuBar: true,
   })
+
+  win.setIcon(image_icon);
 
   win.setSize(1000,600)
 

@@ -32,20 +32,33 @@ const safeDOM = {
  * https://matejkustec.github.io/SpinThatShit
  */
 function useLoading() {
-  const className = `loaders-css__square-spin`
   const styleContent = `
-@keyframes square-spin {
-  25% { transform: perspective(100px) rotateX(180deg) rotateY(0); }
-  50% { transform: perspective(100px) rotateX(180deg) rotateY(180deg); }
-  75% { transform: perspective(100px) rotateX(0) rotateY(180deg); }
-  100% { transform: perspective(100px) rotateX(0) rotateY(0); }
+  @keyframes pulsing {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+.app-loading-logo {
+  width: 300px;
+  height: 220px;
+  background-image: url('/naxi.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
 }
-.${className} > div {
-  animation-fill-mode: both;
-  width: 50px;
-  height: 50px;
-  background: #fff;
-  animation: square-spin 3s 0s cubic-bezier(0.09, 0.57, 0.49, 0.9) infinite;
+.app-loading-logo::after {
+  content: "";
+  width: 300px;
+  height: 220px;
+  display: block;
+  background-image: url('/line.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 150px;
+  z-index: 5000;
+  position: absolute;
+  top: -80px;
+  left: 90px;
+  animation: pulsing 0.2s infinite alternate;
 }
 .app-loading-wrap {
   position: fixed;
@@ -66,7 +79,7 @@ function useLoading() {
   oStyle.id = 'app-loading-style'
   oStyle.innerHTML = styleContent
   oDiv.className = 'app-loading-wrap'
-  oDiv.innerHTML = `<div class="${className}"><div></div></div>`
+  oDiv.innerHTML = `<div class="app-loading-logo"></div>`
 
   return {
     appendLoading() {
@@ -84,9 +97,13 @@ function useLoading() {
 
 const { appendLoading, removeLoading } = useLoading()
 domReady().then(appendLoading)
+//appendLoading();
 
 window.onmessage = ev => {
+  console.log(ev)
   ev.data.payload === 'removeLoading' && removeLoading()
 }
 
-setTimeout(removeLoading, 500)
+setTimeout(removeLoading, 3000)
+
+

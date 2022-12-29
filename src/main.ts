@@ -93,14 +93,18 @@ let player = new Player(50);
 
 const content = document.getElementById('content');
 const panel = <HTMLElement>document.querySelector('#info-panel');
+const expand_btn = document.getElementById("info-expand");
+let panel_expanded = false;
 
 let show_panel = () => {
     panel.querySelector("#info-song-title").innerHTML = player.playing_card.title;
     document.getElementById("info-dummy").style.backgroundColor = player.playing_card.color;
     document.getElementById("info-panel-box").style.backgroundColor = player.playing_card.color;
+    let expand_btn = <HTMLElement>document.querySelector("#info-expand > svg");
+    expand_btn.style.fill = player.playing_card.color;
     anime({
         targets: panel,
-        bottom: "0",
+        bottom: "-4em",
         duration: 300,
         easing: "easeOutQuart"
     })
@@ -109,11 +113,51 @@ let show_panel = () => {
 let hide_panel = () => {
     anime({
         targets: panel,
-        bottom: "-4em",
+        bottom: "-8em",
+        duration: 300,
+        easing: "easeOutQuart"
+    })
+    panel_expanded = false;
+    anime({
+        targets: expand_btn,
+        rotate: "0deg",
         duration: 300,
         easing: "easeOutQuart"
     })
 }
+
+let expand_panel = () => {
+    if (panel_expanded) {
+        anime({
+            targets: panel,
+            bottom: "-4em",
+            duration: 300,
+            easing: "easeOutQuart"
+        })
+        anime({
+            targets: expand_btn,
+            rotate: "0deg",
+            duration: 300,
+            easing: "easeOutQuart"
+        })
+        panel_expanded = false;
+    } else {
+        anime({
+            targets: panel,
+            bottom: "0em",
+            duration: 300,
+            easing: "easeOutQuart"
+        })
+        anime({
+            targets: expand_btn,
+            rotate: "180deg",
+            duration: 300,
+            easing: "easeOutQuart"
+        })
+        panel_expanded = true;
+    }
+}
+
 
 let parse_data = () => {
     for (const [category_title, genres] of Object.entries(json.Kategorije)) {
@@ -138,6 +182,10 @@ let add_event_listeners = () => {
         card.node.addEventListener('click', () => {
             player.request_play(card);
         });
+    })
+
+    expand_btn.addEventListener("click", () => {
+        expand_panel();
     })
 }
 

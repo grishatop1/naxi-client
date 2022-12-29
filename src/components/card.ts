@@ -11,6 +11,7 @@ export class Card {
     is_loading_metadata: boolean
     current_artist?: string
     current_song?: string
+    last_five_songs?: Array<string>
     color: string
     url: string
     metadata_url: string
@@ -23,6 +24,7 @@ export class Card {
         this.color = color;
         this.url = url;
         this.metadata_url = metadata_url;
+        this.last_five_songs = [];
 
         this.fetch_startup();
         this.setup_metadata_fetching();
@@ -68,7 +70,7 @@ export class Card {
                 await this.fetch_metadata();
                 this.update_metadata_card();
             }
-        }, 3000)
+        }, 6000)
     }
     async update_metadata_everywhere() {
         const meta = await this.get_playstrings();
@@ -79,6 +81,15 @@ export class Card {
             title: this.current_song,
             artist: this.current_artist,
         });
+        let i = 1;
+        document.getElementById("info-last5").innerHTML = "";
+        for (const last_song of this.last_five_songs) {
+            const last_song_node = document.createElement('b')
+            last_song_node.innerHTML = i.toString() + ". " + last_song;
+            last_song_node.className = "mx-1 whitespace-nowrap"
+            document.getElementById("info-last5").appendChild(last_song_node);
+            i++;
+        }
     }
     async update_metadata_card() {
         const meta = await this.get_playstrings();
@@ -106,10 +117,18 @@ export class Card {
         try {
             let request = await fetch(this.metadata_url);
             let data = await request.json();
-            const unparsed_html = data['rs']
-            const parsed = new DOMParser().parseFromString(unparsed_html, "text/xml");
+            const unparsed_html = data['rs'];
+            const parsed = new DOMParser().parseFromString(unparsed_html, "text/html");
+
             const artist = parsed.querySelector(".details p span").innerHTML + " ";
             const song = [].reduce.call(parsed.querySelector(".details p").childNodes, function (a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
+            
+            const songs = parsed.querySelector("ol").children;
+            
+            this.last_five_songs = [];
+            for (const song_node of songs) {
+                this.last_five_songs.push(song_node.innerHTML.trim());
+            }
             this.current_artist = artist.trim();
             this.current_song = song.trim().slice(2);
         } catch {

@@ -84,7 +84,7 @@ export class Card {
         let i = 1;
         document.getElementById("info-last5").innerHTML = "";
         for (const last_song of this.last_five_songs) {
-            const last_song_node = document.createElement('b')
+            const last_song_node = document.createElement('span')
             last_song_node.innerHTML = i.toString() + ". " + last_song;
             last_song_node.className = "mx-1 whitespace-nowrap"
             document.getElementById("info-last5").appendChild(last_song_node);

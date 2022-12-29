@@ -1,53 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/style.css">
-    <title>Naxi Radio</title>
-  </head>
-  <body class="dark:bg-[#202029] overflow-x-hidden">
-    <div id="app">
-      <div id="theme-btn" class="fixed z-[1000] right-5 top-6 w-[2.7em] h-[2.7em] bg-[#202029] rounded-full cursor-pointer flex justify-center items-center shadow-xl group overflow-hidden">
-        <img id="moon" src="/moon.svg" class="h-[1.3em] absolute select-none">
-        <img id="sun" src="/sun.svg" class="h-[1.5em] absolute select-none" style="transform: translateX(3em);">
-      </div>
-      <div>
-        <div class="relative my-5 select-none flex justify-center">
-          <img src="/naxitext.png" alt="Naxi Radio" class="z-[20]">
-          <div class="absolute w-full h-[2em] bg-[#005088] top-[4.5em]">
-          </div>
-        </div>
-      </div>
 
-      <div class="sticky top-3 flex justify-center z-[100]">
-        <div id="categories" class="flex flex-row bg-white rounded-lg dark:bg-[#3c3c4a]" style="box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);"></div>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./src/style.css">
+  <title>Naxi Radio</title>
+</head>
 
-      <div id="content" class="mb-[5em]">
-      </div>
-      <div id="info-panel" class="info fixed bottom-[-4em] w-full h-[4em] bg-white flex items-center flex-row justify-center dark:bg-[#2a2a36]" style="box-shadow: 0px -13px 17px -17px rgba(0,0,0,0.93);">
-        
-        <div id="info-panel-box" class="ml-10 relative info-card rounded-xl bg-gray-400 w-[100%] h-[3em] flex items-center justify-between overflow-hidden tablet-xl:justify-center">
-          <div id="info-dummy" class="brightness-[0.9] w-[300px] h-[100px] absolute left-[-230px] bg-black rotate-[-10deg] tablet-xl:hidden">
-          </div>
-          <span class="text-white text-xl font-bold mx-10 whitespace-nowrap leading-normal relative select-none" id="info-song-title">Radio</span>
-          <span class="text-white mx-10 text-center relative z-[20] relative tablet-xl:hidden" id="info-now-playing">Loading...</span>
-        </div>
-        
-        <div class="naxi-logo text-xl w-[20em] whitespace-nowrap text-center dark:text-white select-none">
-          Naxi 🎵
-        </div>
-        
-        <div class="flex flex-row w-min justify-center mr-10">
-          <div class="text-xl whitespace-nowrap mr-3 dark:text-white select-none">
-              🔊
-          </div>
-          <input id="volume-slider" type="range" min="0" max="100" value="50" class="range focus:border-transparent focus:ring-0"/>
+<body class="dark:bg-[#202029] overflow-x-hidden">
+  <div id="app">
+    <div id="theme-btn"
+      class="fixed z-[1000] right-5 top-6 w-[2.7em] h-[2.7em] bg-[#202029] rounded-full cursor-pointer flex justify-center items-center shadow-xl group overflow-hidden">
+      <img id="moon" src="/moon.svg" class="h-[1.3em] absolute select-none">
+      <img id="sun" src="/sun.svg" class="h-[1.5em] absolute select-none" style="transform: translateX(3em);">
+    </div>
+    <div>
+      <div class="relative my-5 select-none flex justify-center">
+        <img src="/naxitext.png" alt="Naxi Radio" class="z-[20]">
+        <div class="absolute w-full h-[2em] bg-[#005088] top-[4.5em]">
         </div>
       </div>
     </div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+    <div class="sticky top-3 flex justify-center z-[100]">
+      <div id="categories" class="flex flex-row bg-white rounded-lg dark:bg-[#3c3c4a]"
+        style="box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.3);"></div>
+    </div>
+
+    <div id="content" class="mb-[5em]">
+    </div>
+    <div id="info-panel"
+      class="info fixed bottom-[-8em] w-full bg-white flex flex-col dark:bg-[#2a2a36]"
+      style="box-shadow: 0px -13px 17px -17px rgba(0,0,0,0.93);">
+      <div class="info-panel-row flex flex-row items-center justify-center h-[4em]">
+        <div id="info-panel-box"
+          class="ml-10 relative info-card rounded-xl bg-gray-400 w-[100%] h-[3em] flex items-center justify-between overflow-hidden tablet-xl:justify-center">
+          <div id="info-dummy"
+            class="brightness-[0.9] w-[300px] h-[100px] absolute left-[-230px] bg-black rotate-[-10deg] tablet-xl:hidden">
+          </div>
+          <span class="text-white text-xl font-bold mx-10 whitespace-nowrap leading-normal relative select-none"
+            id="info-song-title">Radio</span>
+          <span class="text-white mx-10 text-center relative z-[20] relative tablet-xl:hidden"
+            id="info-now-playing">Loading...</span>
+        </div>
+
+        <div class="naxi-logo text-xl w-[20em] whitespace-nowrap text-center dark:text-white select-none">
+          Naxi 🎵
+        </div>
+
+        <div class="flex flex-row w-min justify-center mr-10">
+          <div class="text-xl whitespace-nowrap mr-3 dark:text-white select-none">
+            🔊
+          </div>
+          <input id="volume-slider" type="range" min="0" max="100" value="50"
+            class="range focus:border-transparent focus:ring-0" />
+        </div>
+        <div class="cursor-pointer" id="info-expand">
+          <svg class="fill-black dark:!fill-white h-[2em] w-[5em]" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">
+            <g>
+              <g>
+                <path d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M377.749,313.749    c-4.16,4.16-9.621,6.251-15.083,6.251c-5.462,0-10.923-2.091-15.083-6.251L256,222.165l-91.584,91.584    c-8.341,8.341-21.824,8.341-30.165,0c-8.341-8.341-8.341-21.824,0-30.165l106.667-106.667c8.341-8.341,21.824-8.341,30.165,0    L377.75,283.584C386.091,291.925,386.091,305.408,377.749,313.749z"/>
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <div class="info-panel-row flex flex-row h-[4em] w-full items-center justify-center">
+        <div class="mx-10 font-bold whitespace-nowrap dark:text-white">
+          Poslednjih 5 pesama:
+        </div>
+        <div id="info-last5" class="flex flex-col text-center text-black text-base tdark:text-white overflow-y-scroll overflow-x-hidden h-[4em] w-1/2">
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>

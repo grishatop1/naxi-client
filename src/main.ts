@@ -187,6 +187,8 @@ let add_event_listeners = () => {
     expand_btn.addEventListener("click", () => {
         expand_panel();
     })
+
+    document.getElementById('info-stop').addEventListener('click', () => { player.stop() })
 }
 
 let add_categories = () => {

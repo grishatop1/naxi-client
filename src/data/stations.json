@@ -1,13 +1,11 @@
 {
     "Kategorije": {
-        "Naxi": {
+        "Naxi + Mix": {
             "Naxi": {
                 "url": "https://naxi128ssl.streaming.rs:9152/;stream.nsv",
                 "color": "#0098d2",
                 "metadata": "https://www.naxi.rs/stations/rs-naxi.json"
-            }
-        },
-        "Mix": {
+            },
             "Mix": {
                 "url": "https://naxidigital-mix128ssl.streaming.rs:8222/;stream.nsv",
                 "color": "#de2c2c",
@@ -135,18 +133,6 @@
                 "metadata": "https://www.naxi.rs/stations/rs-millennium.json"
             }
         },
-        "Domaće (starije)": {
-            "Boem": {
-                "url": "https://naxidigital-boem128ssl.streaming.rs:8162/;stream.nsv",
-                "color": "#caa013",
-                "metadata": "https://www.naxi.rs/stations/rs-boem.json"
-            },
-            "Šlager": {
-                "url": "https://naxidigital-slager128ssl.streaming.rs:8372/;stream.nsv",
-                "color": "#cc8e39",
-                "metadata": "https://www.naxi.rs/stations/rs-slager.json"
-            }
-        },
         "Rock": {
             "Blues Rock": {
                 "url": "https://naxidigital-blues128ssl.streaming.rs:8312/;stream.nsv",
@@ -159,7 +145,17 @@
                 "metadata": "https://www.naxi.rs/stations/rs-rock.json"
             }
         },
-        "Domaće (novije)": {
+        "Domaće": {
+            "Boem": {
+                "url": "https://naxidigital-boem128ssl.streaming.rs:8162/;stream.nsv",
+                "color": "#caa013",
+                "metadata": "https://www.naxi.rs/stations/rs-boem.json"
+            },
+            "Šlager": {
+                "url": "https://naxidigital-slager128ssl.streaming.rs:8372/;stream.nsv",
+                "color": "#cc8e39",
+                "metadata": "https://www.naxi.rs/stations/rs-slager.json"
+            },
             "Hype": {
                 "url": "https://naxidigital-hype128ssl.streaming.rs:8272/;stream.nsv",
                 "color": "#5821b8",

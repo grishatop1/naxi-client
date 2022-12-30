@@ -119,10 +119,16 @@ export class Card {
             let data = await request.json();
             const unparsed_html = data['rs'];
             const parsed = new DOMParser().parseFromString(unparsed_html, "text/html");
-
-            const artist = parsed.querySelector(".details p span").innerHTML + " ";
-            const song = [].reduce.call(parsed.querySelector(".details p").childNodes, function (a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
-            
+            if (this.title === "Naxi") {
+                console.log(parsed);
+                /*const artist = parsed.querySelector(".details p span").innerHTML + " ";
+                const song = [].reduce.call(parsed.querySelector(".details p").childNodes, function (a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
+                */
+            }
+            else {
+                const artist = parsed.querySelector(".details p span").innerHTML + " ";
+                const song = [].reduce.call(parsed.querySelector(".details p").childNodes, function (a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
+            }
             const songs = parsed.querySelector("ol").children;
             
             this.last_five_songs = [];

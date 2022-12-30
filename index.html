@@ -61,7 +61,7 @@
             class="range focus:border-transparent focus:ring-0" />
         </div>
         <div class="cursor-pointer" id="info-expand">
-          <svg class="fill-black dark:!fill-white h-[2em] w-[5em]" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">
+          <svg class="fill-black dark:!fill-white h-[2em] w-[5em] hover:scale-[1.1]" height="800px" width="800px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">
             <g>
               <g>
                 <path d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M377.749,313.749    c-4.16,4.16-9.621,6.251-15.083,6.251c-5.462,0-10.923-2.091-15.083-6.251L256,222.165l-91.584,91.584    c-8.341,8.341-21.824,8.341-30.165,0c-8.341-8.341-8.341-21.824,0-30.165l106.667-106.667c8.341-8.341,21.824-8.341,30.165,0    L377.75,283.584C386.091,291.925,386.091,305.408,377.749,313.749z"/>
@@ -71,11 +71,12 @@
         </div>
       </div>
       <div class="info-panel-row flex flex-row h-[4em] w-full items-center justify-center">
+        <div id="show-info" class="mx-10 font-bold whitespace-nowrap dark:text-white">
+        </div>
         <div class="mx-10 font-bold whitespace-nowrap dark:text-white">
           Poslednjih 5 pesama:
         </div>
         <div id="info-last5" class="flex flex-col text-center text-black text-base dark:text-white overflow-y-scroll overflow-x-hidden h-[4em] w-1/2">
-
         </div>
       </div>
     </div>

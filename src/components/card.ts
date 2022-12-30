@@ -78,6 +78,7 @@ export class Card {
         document.querySelector('#info-now-playing').innerHTML = meta.play_string;
         document.title = meta.play_title_string;
         navigator.mediaSession.metadata = new MediaMetadata({
+            show: this.current_show,
             title: this.current_song,
             artist: this.current_artist,
         });
@@ -103,6 +104,8 @@ export class Card {
         } else {
             if (this.current_song) {
                 play_string = `${this.current_artist} - ${this.current_song}`
+            } else if (this.current_show) {
+                play_string = `${this.current_show}`
             } else {
                 play_string = `${this.current_artist}`
             }
@@ -119,24 +122,29 @@ export class Card {
             let data = await request.json();
             const unparsed_html = data['rs'];
             const parsed = new DOMParser().parseFromString(unparsed_html, "text/html");
+            var show = "";
             var artist = "";
             var song = "";
             if (this.title === "Naxi") {
+                show = parsed.querySelector(".details p span").innerHTML + " ";
                 artist = parsed.querySelectorAll(".details p span")[1].innerHTML+" ";
                 song = [].reduce.call(parsed.querySelectorAll(".details p")[1].childNodes, function (a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
             } else {
                 artist = parsed.querySelector(".details p span").innerHTML + " ";
                 song = [].reduce.call(parsed.querySelector(".details p").childNodes, function (a, b) { return a + (b.nodeType === 3 ? b.textContent : '').trim(); }, '');
             }
+
             const songs = parsed.querySelector("ol").children;
             
             this.last_five_songs = [];
             for (const song_node of songs) {
                 this.last_five_songs.push(song_node.innerHTML.trim());
             }
+            this.current_show = show.trim();
             this.current_artist = artist.trim();
             this.current_song = song.trim().slice(2);
         } catch {
+            this.current_show = null;
             this.current_artist = null;
             this.current_song = null;
         }

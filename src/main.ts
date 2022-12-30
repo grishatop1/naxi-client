@@ -59,6 +59,13 @@ class Player {
         card.set_loading_song();
         this.is_loading = true;
         this.playing_card = card;
+        if (this.playing_card.title === "Naxi") {
+            document.getElementById("show-info").style.display = "inline";
+            document.getElementById("show-info").innerHTML = this.playing_card.current_show;
+        } else {
+            document.getElementById("show-info").style.display = "none";
+            document.getElementById("show-info").innerHTML = "";
+        }
         this.sound = soundManager.createSound({
             url: card.url,
             autoLoad: true,

@@ -11,6 +11,7 @@ export class Card {
     is_loading_metadata: boolean
     current_artist?: string
     current_song?: string
+    current_show?: string
     last_five_songs?: Array<string>
     color: string
     url: string
@@ -78,7 +79,6 @@ export class Card {
         document.querySelector('#info-now-playing').innerHTML = meta.play_string;
         document.title = meta.play_title_string;
         navigator.mediaSession.metadata = new MediaMetadata({
-            show: this.current_show,
             title: this.current_song,
             artist: this.current_artist,
         });

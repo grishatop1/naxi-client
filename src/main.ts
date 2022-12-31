@@ -230,9 +230,8 @@ navigator.mediaSession.setActionHandler("stop", () => {
     player.stop()
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    parse_data();
-    add_event_listeners();
-    enableThemeSwitching();
-    add_categories();
-});
+//ENTRY
+parse_data();
+add_event_listeners();
+enableThemeSwitching();
+add_categories();

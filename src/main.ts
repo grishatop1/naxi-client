@@ -15,12 +15,6 @@ soundManager.setup({
     debugMode: false
 })
 
-let get_cache = async () => {
-    let data = await ipcRenderer.invoke('get_cache');
-    player.change_volume(data.volume);
-    //document.documentElement.classList.add(data.theme);
-}
-
 class Player {
     sound?: soundmanager.SMSound
     playing_card?: Card
@@ -34,13 +28,10 @@ class Player {
         this.volume_slider = <HTMLInputElement>document.getElementById('volume-slider');
 
         this.volume_slider.addEventListener('input', () => {
-            this.change_volume_slider();
+            const new_volume = parseInt(this.volume_slider.value);
+            this.sound.setVolume(new_volume);
+            this.volume = new_volume;
         });
-    }
-    change_volume_slider() {
-        const new_volume = parseInt(this.volume_slider.value);
-        this.sound.setVolume(new_volume);
-        this.volume = new_volume;
     }
     change_volume(value: number) {
         if (this.sound) {
@@ -237,6 +228,12 @@ let scroll_to_category = (category: string) => {
     })
 }
 
+let get_cache = async () => {
+    let data = await ipcRenderer.invoke('get_cache');
+    player.change_volume(data.volume);
+    //document.documentElement.classList.add(data.theme);
+}
+
 let save_cache = () => {
     let volume = player.volume_slider.value;
     let theme = document.documentElement.className;
@@ -257,4 +254,4 @@ add_event_listeners();
 enableThemeSwitching();
 add_categories();
 get_cache();
-setInterval(save_cache, 3000);
+setInterval(save_cache, 1500);

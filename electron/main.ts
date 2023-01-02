@@ -65,7 +65,7 @@ function createWindow() {
     win?.webContents.send('main-process-message', (new Date).toLocaleString())
   })
 
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools()
 
   if (app.isPackaged) {
     win.loadFile(join(process.env.DIST, 'index.html'))

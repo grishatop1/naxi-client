@@ -1,7 +1,6 @@
 import anime from "animejs";
 
 export let enableThemeSwitching = () => {
-    document.documentElement.classList.add("light")
     let current_theme = 'light';
     const theme_btn = document.getElementById('theme-btn');
     theme_btn.addEventListener('click', () => {

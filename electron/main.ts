@@ -14,13 +14,12 @@ import { join } from 'path'
 import { app, BrowserWindow, ipcMain, nativeImage} from 'electron'
 
 const Store = require('electron-store');
-Store.initRenderer();
 
 const schema = {
 	volume: {
 		type: 'number',
 		maximum: 100,
-		minimum: 1,
+		minimum: 0,
 		default: 50
 	},
 	theme: {
@@ -66,7 +65,7 @@ function createWindow() {
     win?.webContents.send('main-process-message', (new Date).toLocaleString())
   })
 
-  //win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   if (app.isPackaged) {
     win.loadFile(join(process.env.DIST, 'index.html'))
@@ -79,13 +78,20 @@ app.on('window-all-closed', () => {
   win = null
 })
 
-let save_cache = (e, data) => {
+let save_cache = (_event, data) => {
   store.set('volume', data.volume)
   store.set('theme', data.theme)
-  console.log("JBT")
+}
+
+let get_cache = () => {
+  return {
+    volume: store.get('volume'),
+    theme: store.get('theme')
+  }
 }
 
 app.whenReady().then(() => {
   ipcMain.on('save_cache', save_cache)
+  ipcMain.handle('get_cache', get_cache)
   createWindow();
 })

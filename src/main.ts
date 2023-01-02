@@ -15,27 +15,39 @@ soundManager.setup({
     debugMode: false
 })
 
+let get_cache = async () => {
+    let data = await ipcRenderer.invoke('get_cache');
+    player.change_volume(data.volume);
+    //document.documentElement.classList.add(data.theme);
+}
+
 class Player {
     sound?: soundmanager.SMSound
     playing_card?: Card
-    volume: number
+    volume?: number
     volume_slider: HTMLInputElement
     is_playing: boolean
     is_loading: boolean
-    constructor(volume: number) {
+    constructor() {
         this.is_loading = false;
         this.is_playing = false;
         this.volume_slider = <HTMLInputElement>document.getElementById('volume-slider');
-        this.volume = volume;
 
         this.volume_slider.addEventListener('input', () => {
-            this.change_volume();
+            this.change_volume_slider();
         });
     }
-    change_volume() {
+    change_volume_slider() {
         const new_volume = parseInt(this.volume_slider.value);
         this.sound.setVolume(new_volume);
         this.volume = new_volume;
+    }
+    change_volume(value: number) {
+        if (this.sound) {
+            this.sound.setVolume(value);
+        }
+        this.volume = value;
+        this.volume_slider.value = value.toString();
     }
     request_play(card: Card) {
         if (this.is_loading) {
@@ -78,6 +90,7 @@ class Player {
                 this.is_loading = false;
                 card.set_loaded_song();
                 this.sound.play();
+                this.sound.setVolume(this.volume);
                 show_panel();
             },
             onerror: () => {
@@ -227,10 +240,8 @@ let scroll_to_category = (category: string) => {
 let save_cache = () => {
     let volume = player.volume_slider.value;
     let theme = document.documentElement.className;
-    ipcRenderer.sendSync('save_cache', {volume: parseInt(volume), theme: theme})
+    ipcRenderer.send('save_cache', {volume: parseInt(volume), theme: theme})
 }
-
-setInterval(save_cache, 3000)
 
 //Media player stuff
 navigator.mediaSession.setActionHandler("pause", () => {
@@ -245,3 +256,5 @@ parse_data();
 add_event_listeners();
 enableThemeSwitching();
 add_categories();
+get_cache();
+setInterval(save_cache, 3000);

@@ -1,7 +1,7 @@
 import path from 'path';
 import anime from 'animejs';
 
-import { enableThemeSwitching } from './components/theme';
+import { set_dark_theme, switch_theme } from './components/theme';
 import { createCardElement, Card } from './components/card';
 import { createCategoryElement } from './components/category';
 import { get_coords } from './components/utils';
@@ -14,6 +14,8 @@ require('soundmanager2');
 soundManager.setup({
     debugMode: false
 })
+
+let current_theme: string;
 
 class Player {
     sound?: soundmanager.SMSound
@@ -102,7 +104,7 @@ class Player {
 }
 
 let cards: Array<Card> = [];
-let player = new Player(50);
+let player = new Player();
 
 const content = document.getElementById('content');
 const panel = <HTMLElement>document.querySelector('#info-panel');
@@ -202,6 +204,11 @@ let add_event_listeners = () => {
     })
 
     document.getElementById('info-stop').addEventListener('click', () => { player.stop() })
+
+    const theme_btn = document.getElementById('theme-btn');
+    theme_btn.addEventListener('click', () => {
+        current_theme = switch_theme(current_theme);
+    });
 }
 
 let add_categories = () => {
@@ -231,12 +238,13 @@ let scroll_to_category = (category: string) => {
 let get_cache = async () => {
     let data = await ipcRenderer.invoke('get_cache');
     player.change_volume(data.volume);
-    //document.documentElement.classList.add(data.theme);
+    current_theme = data.theme;
+    ((data.theme === 'dark') ? set_dark_theme() : '');
 }
 
 let save_cache = () => {
     let volume = player.volume_slider.value;
-    let theme = document.documentElement.className;
+    let theme = current_theme;
     ipcRenderer.send('save_cache', {volume: parseInt(volume), theme: theme})
 }
 
@@ -251,7 +259,6 @@ navigator.mediaSession.setActionHandler("stop", () => {
 //ENTRY
 parse_data();
 add_event_listeners();
-enableThemeSwitching();
 add_categories();
 get_cache();
 setInterval(save_cache, 1500);

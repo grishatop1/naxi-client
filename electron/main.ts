@@ -11,7 +11,24 @@ process.env.DIST = join(__dirname, '..')
 process.env.PUBLIC = app.isPackaged ? process.env.DIST : join(process.env.DIST, '../public')
 
 import { join } from 'path'
-import { app, BrowserWindow, nativeImage} from 'electron'
+import { app, BrowserWindow, ipcMain, nativeImage} from 'electron'
+
+const Store = require('electron-store');
+Store.initRenderer();
+
+const schema = {
+	volume: {
+		type: 'number',
+		maximum: 100,
+		minimum: 1,
+		default: 50
+	},
+	theme: {
+		type: 'string',
+		default: 'light'
+	}
+};
+const store = new Store({schema});
 
 let win: BrowserWindow | null
 // Here, you can also use other preload
@@ -62,4 +79,13 @@ app.on('window-all-closed', () => {
   win = null
 })
 
-app.whenReady().then(createWindow)
+let save_cache = (e, data) => {
+  store.set('volume', data.volume)
+  store.set('theme', data.theme)
+  console.log("JBT")
+}
+
+app.whenReady().then(() => {
+  ipcMain.on('save_cache', save_cache)
+  createWindow();
+})

@@ -5,6 +5,8 @@ import { enableThemeSwitching } from './components/theme';
 import { createCardElement, Card } from './components/card';
 import { createCategoryElement } from './components/category';
 import { get_coords } from './components/utils';
+import { ipcRenderer } from 'electron';
+
 
 const json = require(path.resolve('src/data/stations.json'))
 
@@ -221,6 +223,14 @@ let scroll_to_category = (category: string) => {
         duration: 200
     })
 }
+
+let save_cache = () => {
+    let volume = player.volume_slider.value;
+    let theme = document.documentElement.className;
+    ipcRenderer.sendSync('save_cache', {volume: parseInt(volume), theme: theme})
+}
+
+setInterval(save_cache, 3000)
 
 //Media player stuff
 navigator.mediaSession.setActionHandler("pause", () => {

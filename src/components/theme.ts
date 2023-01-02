@@ -1,11 +1,13 @@
 import anime from "animejs";
 
 export let enableThemeSwitching = () => {
+    document.documentElement.classList.add("light")
     let current_theme = 'light';
     const theme_btn = document.getElementById('theme-btn');
     theme_btn.addEventListener('click', () => {
         if (current_theme === "light") {
             document.documentElement.classList.add("dark")
+            document.documentElement.classList.remove("light")
             current_theme = "dark";
 
             anime({
@@ -21,6 +23,7 @@ export let enableThemeSwitching = () => {
                 backgroundColor: "#fff"
             })
         } else {
+            document.documentElement.classList.add("light")
             document.documentElement.classList.remove("dark")
             current_theme = "light";
 

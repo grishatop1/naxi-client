@@ -15,8 +15,6 @@ soundManager.setup({
     debugMode: false
 })
 
-let current_theme: string;
-
 class Player {
     sound?: soundmanager.SMSound
     playing_card?: Card
@@ -105,6 +103,7 @@ class Player {
 
 let cards: Array<Card> = [];
 let player = new Player();
+let current_theme: string;
 
 const content = document.getElementById('content');
 const panel = <HTMLElement>document.querySelector('#info-panel');

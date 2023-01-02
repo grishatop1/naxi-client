@@ -1,10 +1,12 @@
 import path from 'path';
 import anime from 'animejs';
 
-import { enableThemeSwitching } from './components/theme';
+import { set_dark_theme, switch_theme } from './components/theme';
 import { createCardElement, Card } from './components/card';
 import { createCategoryElement } from './components/category';
 import { get_coords } from './components/utils';
+import { ipcRenderer } from 'electron';
+
 
 const json = require(path.resolve('src/data/stations.json'))
 
@@ -16,24 +18,27 @@ soundManager.setup({
 class Player {
     sound?: soundmanager.SMSound
     playing_card?: Card
-    volume: number
+    volume?: number
     volume_slider: HTMLInputElement
     is_playing: boolean
     is_loading: boolean
-    constructor(volume: number) {
+    constructor() {
         this.is_loading = false;
         this.is_playing = false;
         this.volume_slider = <HTMLInputElement>document.getElementById('volume-slider');
-        this.volume = volume;
 
         this.volume_slider.addEventListener('input', () => {
-            this.change_volume();
+            const new_volume = parseInt(this.volume_slider.value);
+            this.sound.setVolume(new_volume);
+            this.volume = new_volume;
         });
     }
-    change_volume() {
-        const new_volume = parseInt(this.volume_slider.value);
-        this.sound.setVolume(new_volume);
-        this.volume = new_volume;
+    change_volume(value: number) {
+        if (this.sound) {
+            this.sound.setVolume(value);
+        }
+        this.volume = value;
+        this.volume_slider.value = value.toString();
     }
     request_play(card: Card) {
         if (this.is_loading) {
@@ -76,6 +81,7 @@ class Player {
                 this.is_loading = false;
                 card.set_loaded_song();
                 this.sound.play();
+                this.sound.setVolume(this.volume);
                 show_panel();
             },
             onerror: () => {
@@ -96,7 +102,8 @@ class Player {
 }
 
 let cards: Array<Card> = [];
-let player = new Player(50);
+let player = new Player();
+let current_theme: string;
 
 const content = document.getElementById('content');
 const panel = <HTMLElement>document.querySelector('#info-panel');
@@ -196,6 +203,11 @@ let add_event_listeners = () => {
     })
 
     document.getElementById('info-stop').addEventListener('click', () => { player.stop() })
+
+    const theme_btn = document.getElementById('theme-btn');
+    theme_btn.addEventListener('click', () => {
+        current_theme = switch_theme(current_theme);
+    });
 }
 
 let add_categories = () => {
@@ -222,6 +234,19 @@ let scroll_to_category = (category: string) => {
     })
 }
 
+let get_cache = async () => {
+    let data = await ipcRenderer.invoke('get_cache');
+    player.change_volume(data.volume);
+    current_theme = data.theme;
+    ((data.theme === 'dark') ? set_dark_theme() : '');
+}
+
+let save_cache = () => {
+    let volume = player.volume_slider.value;
+    let theme = current_theme;
+    ipcRenderer.send('save_cache', {volume: parseInt(volume), theme: theme})
+}
+
 //Media player stuff
 navigator.mediaSession.setActionHandler("pause", () => {
     player.stop()
@@ -233,5 +258,6 @@ navigator.mediaSession.setActionHandler("stop", () => {
 //ENTRY
 parse_data();
 add_event_listeners();
-enableThemeSwitching();
 add_categories();
+get_cache();
+setInterval(save_cache, 1500);

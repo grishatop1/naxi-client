@@ -7,16 +7,15 @@
   "license": "GPL 3.0",
   "private": true,
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build && electron-builder"
+    "tauri": "tauri",
+    "dev": "vite"
   },
   "devDependencies": {
+    "@tauri-apps/cli": "^1.2.2",
     "@types/animejs": "^3.1.6",
     "@types/soundmanager2": "^2.97.4",
     "@types/toastify-js": "^1.11.1",
     "autoprefixer": "^10.4.13",
-    "electron": "^19.0.6",
-    "electron-builder": "^23.1.0",
     "postcss": "^8.4.20",
     "tailwindcss": "^3.2.4",
     "typescript": "^4.7.4",
@@ -25,7 +24,6 @@
   },
   "dependencies": {
     "animejs": "^3.2.1",
-    "electron-store": "^8.1.0",
     "soundmanager2": "^2.97.20170602",
     "toastify-js": "^1.12.0"
   }

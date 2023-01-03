@@ -1,25 +1,22 @@
-import fs from 'fs'
-import path from 'path'
 import { defineConfig } from 'vite'
-import electron from 'vite-plugin-electron'
-
-fs.rmSync('dist', { recursive: true, force: true }) // v14.14.0
 
 export default defineConfig({
-  plugins: [
-    electron({
-      main: {
-        entry: 'electron/main.ts',
-      },
-      preload: {
-        input: {
-          // Must be use absolute path, this is the restrict of Rollup
-          preload: path.join(__dirname, 'electron/preload.ts'),
-        },
-      },
-      // Enables use of Node.js API in the Renderer-process
-      // https://github.com/electron-vite/vite-plugin-electron/tree/main/packages/electron-renderer#electron-renderervite-serve
-      renderer: {},
-    }),
-  ],
+  // prevent vite from obscuring rust errors
+  clearScreen: false,
+  // Tauri expects a fixed port, fail if that port is not available
+  server: {
+    strictPort: true,
+  },
+  // to make use of `TAURI_PLATFORM`, `TAURI_ARCH`, `TAURI_FAMILY`,
+  // `TAURI_PLATFORM_VERSION`, `TAURI_PLATFORM_TYPE` and `TAURI_DEBUG`
+  // env variables
+  envPrefix: ['VITE_', 'TAURI_'],
+  build: {
+    // Tauri uses Chromium on Windows and WebKit on macOS and Linux
+    target: process.env.TAURI_PLATFORM == 'windows' ? 'chrome105' : 'safari13',
+    // don't minify for debug builds
+    minify: !process.env.TAURI_DEBUG ? 'esbuild' : false,
+    // produce sourcemaps for debug builds
+    sourcemap: !!process.env.TAURI_DEBUG,
+  },
 })
